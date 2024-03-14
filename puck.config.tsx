@@ -1,11 +1,17 @@
 import type { Config } from "@measured/puck";
-import Home from "./components/src/sections/Home";
+import Home from "./components/sections/Home";
+import Image from "next/image";
+import heroImg from "./components/assets/hero.png";
 
 type Props = {
   HeadingBlock: { title: string };
   Paragraph: {
     text: string;
     textAlign: "left" | "center" | "right";
+  };
+  Image: {
+    url: string;
+    mode: "inline" | "background";
   };
 };
 
@@ -44,6 +50,29 @@ export const config: Config<Props> = {
         <div style={{ padding: 64 }}>
           <p style={{ textAlign }}>{text}</p>
         </div>
+      ),
+    },
+    Image: {
+      fields: {
+        url: { type: "text" },
+        mode: {
+          type: "radio",
+          options: [
+            { label: "Inline", value: "inline" },
+            { label: "Background", value: "background" },
+          ],
+        },
+      },
+      defaultProps: {
+        url: "",
+        mode: "inline",
+      },
+      render: ({ url, mode }) => (
+        <Image
+          className="align-top h-full"
+          src={heroImg}
+          alt="wedding couple image"
+        />
       ),
     },
   },

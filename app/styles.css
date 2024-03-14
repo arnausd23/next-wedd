@@ -2,8 +2,42 @@
 @tailwind components;
 @tailwind utilities;
 
-html,
+@font-face {
+  font-family: "serif";
+  src: url(../components/assets/DIL-Serif-Regular.woff2);
+}
+
+@font-face {
+  font-family: "serif";
+  src: url(../components/assets/ppeiko-medium.otf);
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: "sans";
+  src: url(../components/assets/sans.woff);
+}
+
 body {
-  margin: 0;
-  padding: 0;
+  background-color: white;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+span {
+  font-family: "serif", sans-serif;
+}
+
+p {
+  font-family: "sans", sans-serif;
+}
+
+@layer utilities {
+  .center-absolute {
+    transform: translate(-50%, -50%);
+  }
 }
