@@ -2,6 +2,7 @@ import type { Config } from "@measured/puck";
 import Home from "./components/sections/Home";
 import Image from "next/image";
 import heroImg from "./components/assets/hero.png";
+import FileUploader from "./components/components/FileUploader";
 
 type Props = {
   HeadingBlock: { title: string };
@@ -10,6 +11,7 @@ type Props = {
     textAlign: "left" | "center" | "right";
   };
   Image: {
+    file: any;
     url: string;
     mode: "inline" | "background";
   };
@@ -54,6 +56,12 @@ export const config: Config<Props> = {
     },
     Image: {
       fields: {
+        file: {
+          type: "custom",
+          render: ({ name, onChange, value }) => (
+            <FileUploader name={name} onChange={onChange} />
+          ),
+        },
         url: { type: "text" },
         mode: {
           type: "radio",
@@ -64,16 +72,24 @@ export const config: Config<Props> = {
         },
       },
       defaultProps: {
+        file: null,
         url: "",
         mode: "inline",
       },
-      render: ({ url, mode }) => (
-        <Image
-          className="align-top h-full"
-          src={heroImg}
-          alt="wedding couple image"
-        />
-      ),
+      render: ({ url, mode, file }) => {
+        return (
+          <>
+            <p>{file}</p>
+            <Image
+              className="w-14"
+              src={file}
+              width={80}
+              height={80}
+              alt="uploaded img"
+            />
+          </>
+        );
+      },
     },
   },
   root: {
