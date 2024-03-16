@@ -77,16 +77,19 @@ export const config: Config<Props> = {
         mode: "inline",
       },
       render: ({ url, mode, file }) => {
+        console.log(file);
         return (
           <>
-            <p>{file}</p>
-            <Image
-              className="w-14"
-              src={file}
-              width={80}
-              height={80}
-              alt="uploaded img"
-            />
+            {file && (
+              <img src="./public/uploads/img-worlds-of-adventure.jpg" alt="" />
+              // <Image
+              //   className="w-14"
+              //   src={"/public/uploads/img-worlds-of-adventure.jpg"}
+              //   width={300}
+              //   height={300}
+              //   alt="uploaded img"
+              // />
+            )}
           </>
         );
       },

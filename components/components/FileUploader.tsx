@@ -24,9 +24,10 @@ function FileUploader({ name, onChange }) {
         accept="image/*"
         name={name}
         onChange={async (e) => {
-          const url = e.target.files[0];
+          const url = e.target.files[0].name;
+          const file = e.target.files[0];
 
-          await storeImage(url);
+          await storeImage(file);
 
           setImage(url);
           return onChange(url);
