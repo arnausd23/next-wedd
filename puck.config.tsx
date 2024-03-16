@@ -3,6 +3,7 @@ import Home from "./components/sections/Home";
 import Image from "next/image";
 import heroImg from "./components/assets/hero.png";
 import FileUploader from "./components/components/FileUploader";
+import Editor from "./components/components/Editor";
 
 type Props = {
   HeadingBlock: { title: string };
@@ -34,7 +35,6 @@ export const config: Config<Props> = {
     },
     Paragraph: {
       fields: {
-        text: { type: "text" },
         textAlign: {
           type: "radio",
           options: [
@@ -43,16 +43,25 @@ export const config: Config<Props> = {
             { label: "Right", value: "right" },
           ],
         },
+        text: {
+          type: "custom",
+          render: ({ name, onChange, value }) => {
+            return <Editor placeholder={"Lorem"} onChange={onChange} />;
+          },
+        },
       },
       defaultProps: {
         text: "Paragraph",
         textAlign: "left",
       },
-      render: ({ text, textAlign }) => (
-        <div style={{ padding: 64 }}>
-          <p style={{ textAlign }}>{text}</p>
-        </div>
-      ),
+      render: ({ text, textAlign }) => {
+        console.log(text);
+        return (
+          <div style={{ padding: 64 }}>
+            <p style={{ textAlign }}>{text}</p>
+          </div>
+        );
+      },
     },
     Image: {
       fields: {
