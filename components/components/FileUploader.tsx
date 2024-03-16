@@ -33,15 +33,6 @@ function FileUploader({ name, onChange }) {
           return onChange(url);
         }}
       />
-      {image && (
-        <Image
-          className="w-14"
-          src={image}
-          width={80}
-          height={80}
-          alt="uploaded img"
-        />
-      )}
     </div>
   );
 }
