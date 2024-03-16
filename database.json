@@ -1,1 +1,29 @@
-{"/":{"content":[{"type":"HeadingBlock","props":{"title":"Edit this page by adding /edit to the end of the URL","id":"HeadingBlock-1694032984497"}},{"type":"Paragraph","props":{"text":"Paragraphll","textAlign":"left","id":"Paragraph-80eb4d6b-467e-4bcf-8f96-e4eba6d92967"}}],"root":{"props":{"title":""}},"zones":{"root:hero-img":[{"type":"Image","props":{"file":"img-worlds-of-adventure.jpg","url":"","mode":"inline","id":"Image-e32c43bb-d384-4923-a162-e246dbe4463f"}}],"root:my-content":[]}}}
+{
+  "/": {
+    "content": [
+      {
+        "type": "Paragraph",
+        "props": {
+          "text": "<p>jgik <strong style=\"background-color: rgb(191, 144, 0);\">ll&nbsp;</strong>&nbsp;</p>",
+          "textAlign": "left",
+          "id": "Paragraph-80eb4d6b-467e-4bcf-8f96-e4eba6d92967"
+        }
+      }
+    ],
+    "root": { "props": { "title": "" } },
+    "zones": {
+      "root:hero-img": [
+        {
+          "type": "Image",
+          "props": {
+            "file": "img-worlds-of-adventure.jpg",
+            "url": "",
+            "mode": "inline",
+            "id": "Image-e32c43bb-d384-4923-a162-e246dbe4463f"
+          }
+        }
+      ],
+      "root:my-content": []
+    }
+  }
+}

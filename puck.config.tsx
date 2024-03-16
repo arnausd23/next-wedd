@@ -46,7 +46,9 @@ export const config: Config<Props> = {
         text: {
           type: "custom",
           render: ({ name, onChange, value }) => {
-            return <Editor placeholder={"Lorem"} onChange={onChange} />;
+            return (
+              <Editor placeholder={"Lorem"} onChange={onChange} value={value} />
+            );
           },
         },
       },
@@ -55,10 +57,12 @@ export const config: Config<Props> = {
         textAlign: "left",
       },
       render: ({ text, textAlign }) => {
-        console.log(text);
         return (
           <div style={{ padding: 64 }}>
-            <p style={{ textAlign }}>{text}</p>
+            <p
+              style={{ textAlign }}
+              dangerouslySetInnerHTML={{ __html: text }}
+            ></p>
           </div>
         );
       },
