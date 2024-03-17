@@ -109,7 +109,7 @@ export const config: Config<Props> = {
       return (
         <div>
           {/* <Navbar /> */}
-          <DropZone zone="navbar" style={{ minHeight: "auto" }} />
+          <DropZone zone="navbar" />
           <Home />
           {/* <JoinUs />
           <Timeline />
