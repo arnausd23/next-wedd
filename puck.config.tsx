@@ -6,10 +6,8 @@ import FileUploader from "./components/components/FileUploader";
 import Editor from "./components/components/Editor";
 
 type Props = {
-  HeadingBlock: { title: string };
   Paragraph: {
     text: string;
-    textAlign: "left" | "center" | "right";
   };
   Image: {
     file: any;
@@ -20,29 +18,8 @@ type Props = {
 
 export const config: Config<Props> = {
   components: {
-    HeadingBlock: {
-      fields: {
-        title: { type: "text" },
-      },
-      defaultProps: {
-        title: "Heading",
-      },
-      render: ({ title }) => (
-        <div style={{ padding: 64 }}>
-          <h1>{title}</h1>
-        </div>
-      ),
-    },
     Paragraph: {
       fields: {
-        textAlign: {
-          type: "radio",
-          options: [
-            { label: "Left", value: "left" },
-            { label: "Center", value: "center" },
-            { label: "Right", value: "right" },
-          ],
-        },
         text: {
           type: "custom",
           render: ({ name, onChange, value }) => {
@@ -54,17 +31,9 @@ export const config: Config<Props> = {
       },
       defaultProps: {
         text: "Paragraph",
-        textAlign: "left",
       },
-      render: ({ text, textAlign }) => {
-        return (
-          <div style={{ padding: 64 }}>
-            <p
-              style={{ textAlign }}
-              dangerouslySetInnerHTML={{ __html: text }}
-            ></p>
-          </div>
-        );
+      render: ({ text }) => {
+        return <div dangerouslySetInnerHTML={{ __html: text }}></div>;
       },
     },
     Image: {
