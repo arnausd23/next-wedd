@@ -5,8 +5,7 @@ import { DropZone } from "@measured/puck";
 
 function Home() {
   return (
-    // <section className="lg:mt-24 h-full w-screen flex flex-col lg:grid lg:grid-cols-2">
-    <section className="lg:mt-24 h-full w-auto flex flex-col lg:grid lg:grid-cols-2">
+    <section className="lg:mt-24 h-full w-auto flex flex-col lg:grid lg:grid-cols-2 home-section">
       <DropZone zone="hero-img" />
       <div className="max-lg:p-16 bg-green h-full lg:relative max-lg:-order-1 ">
         <div className="max-lg:p-5 lg:absolute lg:top-1/2 lg:left-1/2 lg:center-absolute text-center text-white border-2 border-yellow-500 lg:p-10 relative">

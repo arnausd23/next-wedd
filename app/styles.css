@@ -42,3 +42,11 @@ p {
     transform: translate(-50%, -50%);
   }
 }
+
+/* FIXES FOR Puck EDITOR */
+.Puck header {
+  position: initial;
+}
+.Puck .home-section {
+  margin-top: 0;
+}

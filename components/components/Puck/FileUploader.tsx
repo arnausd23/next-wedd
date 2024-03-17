@@ -1,20 +1,8 @@
-import Image from "next/image";
-import React, { useState } from "react";
+import { useState } from "react";
+import { storeImage } from "./services/FileStorage";
 
 function FileUploader({ name, onChange }) {
   const [image, setImage] = useState(null);
-
-  const storeImage = async (file) => {
-    const fd = new FormData();
-    fd.append("file", file);
-
-    fetch("/api/images", {
-      method: "POST",
-      body: fd,
-    })
-      .then((res) => res.json())
-      .then((data) => console.log(data));
-  };
 
   return (
     <div>
@@ -27,7 +15,7 @@ function FileUploader({ name, onChange }) {
           const url = e.target.files[0].name;
           const file = e.target.files[0];
 
-          await storeImage(file);
+          await storeImage(file, "/api/images");
 
           setImage(url);
           return onChange(url);

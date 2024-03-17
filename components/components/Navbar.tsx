@@ -1,19 +1,37 @@
-import { useState } from "react";
-import logo from "../assets/logo.png";
-
+import { useEffect, useState } from "react";
 import CloseIcon from "./Icons/CloseIcon";
 import OpenIcon from "./Icons/OpenIcon";
+import Image from "next/image";
 
-function Navbar() {
+interface Navlinks {
+  href: string;
+  label: string;
+}
+
+function Navbar({ logo, items }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const navLinks = [
-    { href: "#join-us", label: "Join Us" },
-    { href: "#timeline", label: "Timeline" },
-    { href: "#timer", label: "Timer" },
-    { href: "#information", label: "Information" },
-    { href: "#contact", label: "Contact" },
-    { href: "#gallery", label: "Gallery" },
-  ];
+  const [navLinks, setNavLinks] = useState<Navlinks[]>([]);
+
+  // const navLinks = [
+  // { href: "#join-us", label: "Join Us" },
+  // { href: "#timeline", label: "Timeline" },
+  // { href: "#timer", label: "Timer" },
+  // { href: "#information", label: "Information" },
+  // { href: "#contact", label: "Contact" },
+  // { href: "#gallery", label: "Gallery" },
+  // ];
+
+  useEffect(() => {
+    const navLinks: Navlinks[] = [];
+    items.forEach((item) => {
+      navLinks.push({
+        href: item.link,
+        label: item.title,
+      });
+    });
+
+    setNavLinks(navLinks);
+  }, [items]);
 
   return (
     <>
@@ -25,7 +43,7 @@ function Navbar() {
               className="text-3xl font-bold "
               style={{ gridArea: "1/4" }}
             >
-              <img className="w-20" src={logo} alt="website logo" />
+              <img className="w-20" src={logo} alt="Website logo" />
             </a>
             {navLinks.map((item) => (
               <li key={item.label} className="max-lg:hidden">
@@ -64,7 +82,7 @@ function Navbar() {
               href="/"
               className="text-3xl font-bold absolute top-3 left-1/2 -translate-x-1/2 lg:hidden"
             >
-              <img className="w-28" src={logo} alt="website logo" />
+              <img className="w-28" src={logo} alt="Website logo" />
             </a>
             <ul className="bg-slate-100 pt-24 lg:hidden flex flex-col items-center justify-center h-full ">
               {navLinks.map((item) => (

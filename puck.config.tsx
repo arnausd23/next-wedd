@@ -1,9 +1,9 @@
-import type { Config } from "@measured/puck";
+import { DropZone, type Config } from "@measured/puck";
 import Home from "./components/sections/Home";
 import Image from "next/image";
-import heroImg from "./components/assets/hero.png";
-import FileUploader from "./components/components/FileUploader";
-import Editor from "./components/components/Editor";
+import FileUploader from "./components/components/Puck/FileUploader";
+import Editor from "./components/components/Puck/Editor";
+import Navbar from "./components/components/Navbar";
 
 type Props = {
   Paragraph: {
@@ -13,6 +13,10 @@ type Props = {
     file: any;
     url: string;
     mode: "inline" | "background";
+  };
+  Menu: {
+    logo: any;
+    items: any;
   };
 };
 
@@ -75,12 +79,37 @@ export const config: Config<Props> = {
         );
       },
     },
+    Menu: {
+      fields: {
+        logo: {
+          type: "custom",
+          render: ({ name, onChange, value }) => (
+            <FileUploader name={name} onChange={onChange} />
+          ),
+        },
+        items: {
+          type: "array",
+          arrayFields: {
+            title: { type: "text" },
+            link: { type: "text" },
+          },
+        },
+      },
+      defaultProps: {
+        logo: null,
+        items: [],
+      },
+      render: ({ logo, items }) => {
+        return <Navbar logo={"/uploads/" + logo} items={items} />;
+      },
+    },
   },
   root: {
     render: ({ children }) => {
       return (
         <div>
           {/* <Navbar /> */}
+          <DropZone zone="navbar" style={{ minHeight: "auto" }} />
           <Home />
           {/* <JoinUs />
           <Timeline />
