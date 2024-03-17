@@ -1,5 +1,7 @@
+import { DropZone } from "@measured/puck";
 import leaf from "../assets/b-leaf.png";
 import FlowerIcon from "../components/Icons/FlowerIcon";
+import Image from "next/image";
 
 function JoinUs() {
   return (
@@ -21,13 +23,11 @@ function JoinUs() {
           <FlowerIcon className="w-10 fill-primary" />
           <FlowerIcon className="w-10 fill-primary [transform:rotateY(180deg)]" />
         </div>
-        <span className="font-bold">18th July 2022</span>
+        <span>
+          <DropZone zone="Join Us" />
+        </span>
       </h3>
-      <img
-        className="w-16 mt-14 mb-0 mx-auto "
-        src={leaf}
-        alt="Decoration leaf"
-      />
+      <Image className="w-16 mb-0 mx-auto" src={leaf} alt="Decoration leaf" />
     </section>
   );
 }

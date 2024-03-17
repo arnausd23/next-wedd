@@ -4,6 +4,8 @@ import Image from "next/image";
 import FileUploader from "./components/components/Puck/FileUploader";
 import Editor from "./components/components/Puck/Editor";
 import Navbar from "./components/components/Navbar";
+import JoinUs from "./components/sections/JoinUs";
+import Timeline from "./components/sections/Timeline";
 
 type Props = {
   Paragraph: {
@@ -16,6 +18,9 @@ type Props = {
   };
   Menu: {
     logo: any;
+    items: any;
+  };
+  Grid: {
     items: any;
   };
 };
@@ -103,20 +108,43 @@ export const config: Config<Props> = {
         return <Navbar logo={"/uploads/" + logo} items={items} />;
       },
     },
+    Grid: {
+      fields: {
+        items: {
+          type: "array",
+          arrayFields: {
+            image: {
+              type: "custom",
+              render: ({ name, onChange, value }) => (
+                <FileUploader name={name} onChange={onChange} />
+              ),
+            },
+            title: { type: "text" },
+            description: { type: "text" },
+            schedule: { type: "text" },
+          },
+        },
+      },
+      defaultProps: {
+        items: [],
+      },
+      render: ({ items }) => {
+        return <Timeline timeline={items} />;
+      },
+    },
   },
   root: {
     render: ({ children }) => {
       return (
         <div>
-          {/* <Navbar /> */}
           <DropZone zone="navbar" />
           <Home />
-          {/* <JoinUs />
-          <Timeline />
-          <Timer />
-          <Information />
-          <Contact />
-          <Gallery /> */}
+          <JoinUs />
+          <DropZone zone="Timeline" />
+          {/* <Timer /> */}
+          {/* <Information /> */}
+          {/* <Contact /> */}
+          {/* <Gallery /> */}
           {children}
         </div>
       );

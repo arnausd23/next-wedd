@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import fetchTimeline from "../services/fetchTimeline";
+import { DropZone } from "@measured/puck";
 
 export interface Timeline {
   schedule: string;
@@ -8,28 +9,7 @@ export interface Timeline {
   image: string;
 }
 
-function Timeline() {
-  const [timeline, setTimeline] = useState<Timeline[]>([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetchTimeline();
-      const timeline = response.results.toReversed().map((event: any) => {
-        const { description, image, schedule, title } = event.properties;
-        return {
-          schedule: schedule.rich_text[0].plain_text,
-          title: title.rich_text[0].plain_text,
-          description: description.rich_text[0].plain_text,
-          image: image.files[0].file.url,
-        };
-      });
-
-      setTimeline(timeline);
-    };
-
-    fetchData().catch(console.error);
-  }, []);
-
+function Timeline({ timeline }: { timeline: Timeline[] }) {
   return (
     <section
       id="timeline"
@@ -41,7 +21,7 @@ function Timeline() {
         return (
           <div className="flex flex-col mb-14 lg:mb-0 lg:grid lg:grid-cols-3 items-center justify-items-center">
             <div
-              style={{ backgroundImage: `url(${image})` }}
+              style={{ backgroundImage: `url(${"/uploads/" + image})` }}
               className={
                 "w-60 h-60 rounded-full bg-cover bg-center mb-10" +
                 (index % 2 == 0 ? "" : " lg:order-3")
