@@ -9,6 +9,7 @@ import Timeline from "./components/sections/Timeline";
 import Gallery from "./components/sections/Gallery";
 import Button from "./components/components/Button";
 import googleDriveIcon from "./components/assets/google-drive.png";
+import Timer from "./components/sections/Timer";
 
 type Props = {
   Paragraph: {
@@ -31,6 +32,9 @@ type Props = {
     link: string;
     text: string;
     hasImage: boolean;
+  };
+  Calendar: {
+    date: string;
   };
 };
 
@@ -189,6 +193,32 @@ export const config: Config<Props> = {
         return <Timeline timeline={items} />;
       },
     },
+    Calendar: {
+      fields: {
+        date: {
+          type: "custom",
+          render: ({ name, onChange, value }) => {
+            return (
+              <>
+                <label>Start date:</label>
+                <br />
+                <input
+                  type="date"
+                  value={value}
+                  onChange={(e) => onChange(e.target.value)}
+                />
+              </>
+            );
+          },
+        },
+      },
+      defaultProps: {
+        date: "",
+      },
+      render: ({ date }) => {;
+        return <Timer date={date} />;
+      },
+    },
   },
   root: {
     render: ({ children }) => {
@@ -198,7 +228,7 @@ export const config: Config<Props> = {
           <Home />
           <JoinUs />
           <DropZone zone="Timeline" />
-          {/* <Timer /> */}
+          <DropZone zone="Timer" />
           {/* <Information /> */}
           {/* <Contact /> */}
           <Gallery />

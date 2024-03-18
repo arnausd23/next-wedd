@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import leaf from "../assets/b-leaf.png";
 import rings from "../assets/rings.png";
-import fetchWeddingDate from "../services/fetchWeddingDate";
+import Image from "next/image";
 
 interface TimeLeft {
   days: number;
@@ -10,28 +10,8 @@ interface TimeLeft {
   seconds: number;
 }
 
-function Timer() {
-  const [date, setDate] = useState<Date | null>(null);
+function Timer({ date }: { date: string }) {
   const [timeLeft, setTimeLeft] = useState<TimeLeft>(calculateTimeLeft());
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetchWeddingDate();
-
-      const date = response.results.map((event: any) => {
-        const { date } = event.properties;
-        return {
-          date: date.date.start,
-        };
-      });
-
-      if (!date) return;
-      const formattedDate = new Date(date[0].date);
-      setDate(formattedDate);
-    };
-
-    fetchData().catch(console.error);
-  }, []);
 
   useEffect(() => {
     if (!date) return;
@@ -59,16 +39,15 @@ function Timer() {
         seconds: Math.floor((difference / 1000) % 60),
       };
     }
-
     return timeLeft;
   }
 
   return (
     <section id="timer" className="bg-secondary py-10 px-5 lg:py-20">
       <div className="lg:hidden flex items-baseline justify-center gap-4 mb-8">
-        <img className="w-16 -scale-y-100" src={leaf} alt="Decoration leaf" />
-        <img className="w-14" src={rings} alt="Decoration rings" />
-        <img className="w-16 rotate-180" src={leaf} alt="Decoration leaf" />
+        <Image className="w-16 -scale-y-100" src={leaf} alt="Decoration leaf" />
+        <Image className="w-14" src={rings} alt="Decoration rings" />
+        <Image className="w-16 rotate-180" src={leaf} alt="Decoration leaf" />
       </div>
       {timeLeft && (
         <div className="relative grid grid-cols-4 items-center justify-center max-w-2xl my-0 mx-auto">
@@ -96,12 +75,12 @@ function Timer() {
             </span>
             <p className="text-4xl lg:text-5xl">{timeLeft.seconds}</p>
           </div>
-          <img
+          <Image
             className="absolute hidden lg:block w-16 -top-6 -left-14 -scale-y-100"
             src={leaf}
             alt="Decoration leaf"
           />
-          <img
+          <Image
             className="absolute hidden lg:block w-16 -top-6 -right-14 rotate-180"
             src={leaf}
             alt="Decoration leaf"

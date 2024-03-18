@@ -19,7 +19,10 @@ function Timeline({ timeline }: { timeline: Timeline[] }) {
         const { description, image, schedule, title } = event;
 
         return (
-          <div className="flex flex-col mb-14 lg:mb-0 lg:grid lg:grid-cols-3 items-center justify-items-center">
+          <div
+            key={"timeline" + index}
+            className="flex flex-col mb-14 lg:mb-0 lg:grid lg:grid-cols-3 items-center justify-items-center"
+          >
             <div
               style={{ backgroundImage: `url(${"/uploads/" + image})` }}
               className={
