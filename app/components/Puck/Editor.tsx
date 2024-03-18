@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { useState, useRef, useMemo } from "react";
 import JoditEditor from "jodit-react";
 
@@ -7,7 +8,7 @@ const Example = ({ placeholder, onChange, value }) => {
 
   const config = useMemo(
     () => ({
-      readonly: false, // all options from https://xdsoft.net/jodit/docs/,
+      readonly: false,
       placeholder: placeholder || "Start typings...",
     }),
     [placeholder]

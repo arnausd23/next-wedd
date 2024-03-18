@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import fetchTimeline from "../services/fetchTimeline";
 import { DropZone } from "@measured/puck";
 
 export interface Timeline {

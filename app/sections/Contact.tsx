@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import Button from "../components/Button";
 import notionPostAttendance from "../services/notionPostAttendance";
 

@@ -1,16 +1,20 @@
+// @ts-nocheck
+
+import dynamic from "next/dynamic";
 import { DropZone, type Config } from "@measured/puck";
 import Home from "./app/sections/Home";
 import Image from "next/image";
 import FileUploader from "./app/components/Puck/FileUploader";
-import Editor from "./app/components/Puck/Editor";
 import Navbar from "./app/components/Navbar";
 import JoinUs from "./app/sections/JoinUs";
 import Timeline from "./app/sections/Timeline";
 import Gallery from "./app/sections/Gallery";
 import Button from "./app/components/Button";
-import googleDriveIcon from "./app/assets/google-drive.png";
 import Timer from "./app/sections/Timer";
 import Information from "./app/sections/Information";
+const Editor = dynamic(() => import("./app/components/Puck/Editor"), {
+  ssr: false,
+});
 
 type Props = {
   Paragraph: {

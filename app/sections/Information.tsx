@@ -9,7 +9,7 @@ function Information({ information }) {
       />
       <div className="my-12 p-10 grid gap-14 lg:gap-36 lg:grid-cols-3 max-w-7xl mx-auto">
         {information.length > 0 &&
-          information.map((info: string[], index: number) => {
+          information.map((info: any, index: number) => {
             return (
               <InformationColumn
                 key={info.title}

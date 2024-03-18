@@ -7,5 +7,9 @@ export const getPage = (path: string) => {
     ? JSON.parse(fs.readFileSync("database.json", "utf-8"))
     : null;
 
-  return allData ? allData[path] : null;
+  if (!allData) {
+    throw new Error("Database not found");
+  }
+
+  return allData[path];
 };
