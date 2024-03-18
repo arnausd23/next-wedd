@@ -6,6 +6,9 @@ import Editor from "./components/components/Puck/Editor";
 import Navbar from "./components/components/Navbar";
 import JoinUs from "./components/sections/JoinUs";
 import Timeline from "./components/sections/Timeline";
+import Gallery from "./components/sections/Gallery";
+import Button from "./components/components/Button";
+import googleDriveIcon from "./components/assets/google-drive.png";
 
 type Props = {
   Paragraph: {
@@ -22,6 +25,12 @@ type Props = {
   };
   Grid: {
     items: any;
+  };
+  Button: {
+    file: any;
+    link: string;
+    text: string;
+    hasImage: boolean;
   };
 };
 
@@ -50,7 +59,9 @@ export const config: Config<Props> = {
         file: {
           type: "custom",
           render: ({ name, onChange, value }) => (
-            <FileUploader name={name} onChange={onChange} />
+            <>
+              <FileUploader name={name} onChange={onChange} />
+            </>
           ),
         },
         url: { type: "text" },
@@ -71,16 +82,60 @@ export const config: Config<Props> = {
         return (
           <>
             {file && (
-              <img src={"/uploads/" + file} alt="" />
-              // <Image
-              //   className="w-14"
-              //   src={"/public/uploads/img-worlds-of-adventure.jpg"}
-              //   width={300}
-              //   height={300}
-              //   alt="uploaded img"
-              // />
+              <>
+                <img src={"/uploads/" + file} alt="" />
+              </>
             )}
           </>
+        );
+      },
+    },
+    Button: {
+      fields: {
+        file: {
+          type: "custom",
+          render: ({ name, onChange, value }) => (
+            <>
+              <FileUploader name={name} onChange={onChange} />
+            </>
+          ),
+        },
+        link: { type: "text" },
+        text: { type: "text" },
+        hasImage: {
+          type: "radio",
+          options: [
+            { label: "Yes", value: "Yes" },
+            { label: "No", value: "No" },
+          ],
+        },
+      },
+      defaultProps: {
+        file: null,
+        link: "",
+        text: "",
+        hasImage: false,
+      },
+      render: ({ link, text, file, hasImage }) => {
+        return (
+          <Button
+            className="mt-8 lg:mt-12 px-5 lg:px-12"
+            text={text}
+            link={link}
+          >
+            {hasImage && (
+              <img
+                className="w-8 inline mr-4"
+                src={"/uploads/" + file}
+                alt="Button Image"
+              />
+              // <Image
+              //   className="w-8 inline mr-4"
+              //   src={file}
+              //   alt="Google Drive icon"
+              // />
+            )}
+          </Button>
         );
       },
     },
@@ -116,7 +171,9 @@ export const config: Config<Props> = {
             image: {
               type: "custom",
               render: ({ name, onChange, value }) => (
-                <FileUploader name={name} onChange={onChange} />
+                <>
+                  <FileUploader name={name} onChange={onChange} />
+                </>
               ),
             },
             title: { type: "text" },
@@ -144,7 +201,7 @@ export const config: Config<Props> = {
           {/* <Timer /> */}
           {/* <Information /> */}
           {/* <Contact /> */}
-          {/* <Gallery /> */}
+          <Gallery />
           {children}
         </div>
       );
