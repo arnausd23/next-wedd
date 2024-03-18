@@ -1,16 +1,16 @@
 import { DropZone, type Config } from "@measured/puck";
-import Home from "./components/sections/Home";
+import Home from "./app/sections/Home";
 import Image from "next/image";
-import FileUploader from "./components/components/Puck/FileUploader";
-import Editor from "./components/components/Puck/Editor";
-import Navbar from "./components/components/Navbar";
-import JoinUs from "./components/sections/JoinUs";
-import Timeline from "./components/sections/Timeline";
-import Gallery from "./components/sections/Gallery";
-import Button from "./components/components/Button";
-import googleDriveIcon from "./components/assets/google-drive.png";
-import Timer from "./components/sections/Timer";
-import Information from "./components/sections/Information";
+import FileUploader from "./app/components/Puck/FileUploader";
+import Editor from "./app/components/Puck/Editor";
+import Navbar from "./app/components/Navbar";
+import JoinUs from "./app/sections/JoinUs";
+import Timeline from "./app/sections/Timeline";
+import Gallery from "./app/sections/Gallery";
+import Button from "./app/components/Button";
+import googleDriveIcon from "./app/assets/google-drive.png";
+import Timer from "./app/sections/Timer";
+import Information from "./app/sections/Information";
 
 type Props = {
   Paragraph: {

@@ -4,18 +4,18 @@
 
 @font-face {
   font-family: "serif";
-  src: url(../components/assets/DIL-Serif-Regular.woff2);
+  src: url(./assets/DIL-Serif-Regular.woff2);
 }
 
 @font-face {
   font-family: "serif";
-  src: url(../components/assets/ppeiko-medium.otf);
+  src: url(./assets/ppeiko-medium.otf);
   font-weight: bold;
 }
 
 @font-face {
   font-family: "sans";
-  src: url(../components/assets/sans.woff);
+  src: url(./assets/sans.woff);
 }
 
 body {
