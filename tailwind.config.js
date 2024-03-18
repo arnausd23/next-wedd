@@ -3,6 +3,7 @@ module.exports = {
   content: [
     "./index.html",
     "./components/**/*.{js,ts,jsx,tsx}",
+    "./puck.config.tsx",
   ],
   theme: {
     extend: {

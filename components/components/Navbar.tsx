@@ -35,15 +35,22 @@ function Navbar({ logo, items }) {
 
   return (
     <>
-      <header className="sm:px-8 px-4 py-2 z-10 w-full lg:fixed lg:bg-white lg:z-30 lg:top-0">
+      <header
+        className="sm:px-8 px-4 py-2 z-10 w-full lg:fixed lg:bg-white lg:z-30 lg:top-0"
+        style={{ filter: "drop-shadow(4px -7px 9px #333)" }}
+      >
         <nav className="max-lg:flex justify-between items-center max-container">
-          <ul className="flex lg:grid grid-cols-7 justify-center items-center gap-16">
+          <ul className="flex lg:grid grid-cols-7 justify-center items-center gap-16 text-center">
             <a
               href="/"
               className="text-3xl font-bold "
               style={{ gridArea: "1/4" }}
             >
-              <img className="w-20" src={logo} alt="Website logo" />
+              <img
+                className="w-20 my-0 mx-auto"
+                src={logo}
+                alt="Website logo"
+              />
             </a>
             {navLinks.map((item) => (
               <li key={item.label} className="max-lg:hidden">
