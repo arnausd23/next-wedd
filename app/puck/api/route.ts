@@ -5,21 +5,42 @@ import fs from "fs";
 export async function POST(request: Request) {
   const payload = await request.json();
 
-  const existingData = JSON.parse(
-    fs.existsSync("database.json")
-      ? fs.readFileSync("database.json", "utf-8")
-      : "{}"
-  );
+  const GithubToken = process.env.GITHUB_TOKEN;
+  const GistId = process.env.GIST_ID;
+  const content = fs.readFileSync("database.json", "utf-8");
 
-  const updatedData = {
-    ...existingData,
-    [payload.path]: payload.data,
-  };
+  try {
+    const response = await fetch(`https://api.github.com/gists/${GistId}`, {
+      method: "PATCH",
+      headers: {
+        Authorization: `token ${GithubToken}`,
+        Accept: "application/vnd.github.v3+json",
+      },
+      body: JSON.stringify({
+        description: "Updated gist",
+        files: {
+          "database.json": {
+            content,
+          },
+        },
+      }),
+    });
 
-  fs.writeFileSync("database.json", JSON.stringify(updatedData));
+    const data = await response.json();
+    const fileContent = data.files["database.json"].content;
+    const updatedData = {
+      ...fileContent,
+      [payload.path]: payload.data,
+    };
 
-  // Purge Next.js cache
-  revalidatePath(payload.path);
+    fs.writeFileSync("database.json", JSON.stringify(updatedData));
 
-  return NextResponse.json({ status: "ok" });
+    // Purge Next.js cache
+    revalidatePath(payload.path);
+
+    return NextResponse.json({ status: "ok" });
+  } catch (error) {
+    console.error(error);
+    return NextResponse.json({ error: error });
+  }
 }

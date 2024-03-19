@@ -12,15 +12,6 @@ function Navbar({ logo, items }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [navLinks, setNavLinks] = useState<Navlinks[]>([]);
 
-  // const navLinks = [
-  // { href: "#join-us", label: "Join Us" },
-  // { href: "#timeline", label: "Timeline" },
-  // { href: "#timer", label: "Timer" },
-  // { href: "#information", label: "Information" },
-  // { href: "#contact", label: "Contact" },
-  // { href: "#gallery", label: "Gallery" },
-  // ];
-
   useEffect(() => {
     const navLinks: Navlinks[] = [];
     items.forEach((item) => {
@@ -35,10 +26,7 @@ function Navbar({ logo, items }) {
 
   return (
     <>
-      <header
-        className="sm:px-8 px-4 py-2 z-10 w-full lg:fixed lg:bg-white lg:z-30 lg:top-0"
-        style={{ filter: "drop-shadow(4px -7px 9px #333)" }}
-      >
+      <header className="sm:px-8 px-4 py-2 z-10 w-full lg:fixed lg:bg-white lg:z-30 lg:top-0 lg:drop-shadow-md">
         <nav className="max-lg:flex justify-between items-center max-container">
           <ul className="flex lg:grid grid-cols-7 justify-center items-center gap-16 text-center">
             <a

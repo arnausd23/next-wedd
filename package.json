@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build && chmod -R 777 database.json ",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
