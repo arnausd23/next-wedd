@@ -33,7 +33,7 @@ export default async function Page({
   params: { puckPath: string[] };
 }) {
   const path = `/${puckPath.join("/")}`;
-  const data = getPage(path);
+  const data = await getPage(path);
 
   return <Client path={path} data={data} />;
 }
