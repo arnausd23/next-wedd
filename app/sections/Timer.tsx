@@ -11,17 +11,19 @@ interface TimeLeft {
 }
 
 function Timer({ date }: { date: string }) {
-  const [timeLeft, setTimeLeft] = useState<TimeLeft>(calculateTimeLeft());
+  const [timeLeft, setTimeLeft] = useState<TimeLeft | null>(null);
 
   useEffect(() => {
     if (!date) return;
 
-    const timer = setTimeout(() => {
+    setTimeLeft(calculateTimeLeft());
+
+    const timer = setInterval(() => {
       setTimeLeft(calculateTimeLeft());
     }, 1000);
 
-    return () => clearTimeout(timer);
-  });
+    return () => clearInterval(timer);
+  }, [date]);
 
   function calculateTimeLeft(): TimeLeft {
     if (!date) return { days: 0, hours: 0, minutes: 0, seconds: 0 };
@@ -40,6 +42,10 @@ function Timer({ date }: { date: string }) {
       };
     }
     return timeLeft;
+  }
+
+  if (!timeLeft) {
+    return null; // or a loading spinner, or some other placeholder
   }
 
   return (
