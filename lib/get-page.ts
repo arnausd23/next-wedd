@@ -19,10 +19,6 @@ export const getPage = async (path: string) => {
   const fileContent = data.files["database.json"].content;
   const parsedData = JSON.parse(data.files["database.json"].content);
 
-  // const allData: Record<string, Data> | null = fs.existsSync("database.json")
-  //   ? JSON.parse(fs.readFileSync("database.json", "utf-8"))
-  //   : null;
-
   if (!parsedData) {
     throw new Error("Database not found");
   }
