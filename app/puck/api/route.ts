@@ -1,6 +1,5 @@
 import { revalidatePath } from "next/cache";
 import { NextResponse } from "next/server";
-import fs from "fs";
 
 export async function POST(request: Request) {
   try {
@@ -40,7 +39,7 @@ export async function POST(request: Request) {
         },
       }),
     });
-    console.log(await res.json());
+
     // Purge Next.js cache
     revalidatePath(payload.path);
 

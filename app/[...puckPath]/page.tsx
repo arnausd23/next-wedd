@@ -23,7 +23,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const path = `/${puckPath.join("/")}`;
   const page = await getPage(path);
-  const title = "page?.root.props.title";
+  const title = page?.root.props.title;
 
   return {
     title: title || "Untitled",
