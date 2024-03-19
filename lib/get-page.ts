@@ -5,7 +5,6 @@ import fs from "fs";
 export const getPage = async (path: string) => {
   const GithubToken = process.env.GITHUB_TOKEN;
   const GistId = process.env.GIST_ID;
-  const content = fs.readFileSync("database.json", "utf-8");
 
   const response = await fetch(`https://api.github.com/gists/${GistId}`, {
     method: "GET",
