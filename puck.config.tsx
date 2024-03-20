@@ -108,11 +108,13 @@ export const config: Config<Props> = {
       },
       render: ({ type, label }) => {
         return (
-          <div className="p-6">
-            <label>{label}</label>
-            <br />
-            <input type={type} placeholder="Placeholder" />
-          </div>
+          <fieldset className="flex flex-col mb-10">
+            <label className="mb-2">{label}</label>
+            <input
+              className="bg-[#f6f6f6] rounded-md p-2 focus-visible:outline-[#eaeaea]"
+              type={type}
+            />
+          </fieldset>
         );
       },
     },
