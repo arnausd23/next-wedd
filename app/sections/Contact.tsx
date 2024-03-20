@@ -18,6 +18,7 @@ function Contact() {
       data[select.id] = select.value;
     }
 
+    console.log(data);
     // await notionPostAttendance(data);
   };
 

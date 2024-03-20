@@ -51,3 +51,16 @@ p {
 .Puck .home-section {
   margin-top: 0;
 }
+
+/* Override styles to add imgs */
+._DrawerItem-draggable_1qydx_1 {
+  background: transparent;
+  padding: 0;
+  display: flex;
+  border: none;
+  border-radius: none;
+  font-size: var(--puck-font-size-xs);
+}
+._DragIcon_o29on_1 {
+  display: none;
+}
