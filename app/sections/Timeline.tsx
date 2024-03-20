@@ -1,6 +1,3 @@
-import { useEffect, useState } from "react";
-import { DropZone } from "@measured/puck";
-
 export interface Timeline {
   schedule: string;
   title: string;

@@ -60,6 +60,7 @@ type Props = {
     width: string;
     height: string;
     backgroundColor: string;
+    columns: Number;
   };
   Column: {
     width: string;
@@ -281,9 +282,7 @@ export const config: Config<Props> = {
             image: {
               type: "custom",
               render: ({ name, onChange, value }) => (
-                <>
-                  <FileUploader name={name} onChange={onChange} />
-                </>
+                <FileUploader name={name} onChange={onChange} />
               ),
             },
             title: { type: "text" },
@@ -348,22 +347,27 @@ export const config: Config<Props> = {
         width: { type: "text" },
         height: { type: "text" },
         backgroundColor: { type: "text" },
+        columns: { type: "number" },
       },
       defaultProps: {
         width: "100%",
         height: "500px",
-        backgroundColor: "red",
+        columns: 2,
       },
-      render: ({ width, height, backgroundColor }) => {
+      render: ({ width, height, backgroundColor, columns }) => {
         return (
           <section
+            className="grid"
             style={{
               width,
               height,
               backgroundColor,
+              gridTemplateColumns: `repeat(${columns}, 1fr)`,
             }}
           >
-            <DropZone zone="container" />
+            {new Array(columns).fill(0).map((column, index) => {
+              return <DropZone key={index} zone={`Column-${index}`} />;
+            })}
           </section>
         );
       },
@@ -398,6 +402,10 @@ export const config: Config<Props> = {
     },
     layout: {
       components: ["Menu", "Container", "Column"],
+    },
+    customSections: {
+      title: "Custom sections",
+      components: ["Grid", "Calendar", "Information"],
     },
   },
   root: {

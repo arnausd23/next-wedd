@@ -16,7 +16,7 @@ export const getPage = async (path: string) => {
 
   const data = await response.json();
   const fileContent = data.files["database.json"].content;
-  const parsedData = JSON.parse(data.files["database.json"].content);
+  const parsedData = JSON.parse(fileContent);
 
   if (!parsedData) {
     throw new Error("Database not found");
