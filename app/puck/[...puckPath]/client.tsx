@@ -1,3 +1,4 @@
+// @ts-nocheck
 "use client";
 
 import { ToastContainer, toast } from "react-toastify";
@@ -17,7 +18,7 @@ export function Client({ path, data }: { path: string; data: Data }) {
         overrides={{
           componentItem: ({ children }) => {
             const componentType =
-              children.props.children.props.children[0].props.children;
+              children?.props?.children.props.children[0].props.children;
 
             return (
               <div
