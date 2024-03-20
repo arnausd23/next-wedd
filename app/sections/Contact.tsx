@@ -1,7 +1,6 @@
 // @ts-nocheck
 
 import Button from "../components/Button";
-import notionPostAttendance from "../services/notionPostAttendance";
 
 function Contact() {
   const handleSubmit = async () => {
@@ -19,7 +18,7 @@ function Contact() {
       data[select.id] = select.value;
     }
 
-    await notionPostAttendance(data);
+    // await notionPostAttendance(data);
   };
 
   return (

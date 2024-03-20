@@ -12,6 +12,8 @@ import Gallery from "./app/sections/Gallery";
 import Button from "./app/components/Button";
 import Timer from "./app/sections/Timer";
 import Information from "./app/sections/Information";
+import Contact from "./app/sections/Contact";
+
 const Editor = dynamic(() => import("./app/components/Puck/Editor"), {
   ssr: false,
 });
@@ -44,6 +46,26 @@ type Props = {
   Information: {
     information: any[];
   };
+  Field: {
+    type: string;
+  };
+  Textarea: {
+    text: string;
+  };
+  Select: {
+    options: string[];
+    text: string;
+  };
+  Container: {
+    width: string;
+    height: string;
+    backgroundColor: string;
+  };
+  Column: {
+    width: string;
+    height: string;
+    backgroundColor: string;
+  };
 };
 
 export const config: Config<Props> = {
@@ -64,6 +86,80 @@ export const config: Config<Props> = {
       },
       render: ({ text }) => {
         return <div dangerouslySetInnerHTML={{ __html: text }}></div>;
+      },
+    },
+    Field: {
+      fields: {
+        type: {
+          type: "select",
+          options: [
+            { label: "Number", value: "number" },
+            { label: "Text", value: "text" },
+            { label: "Email", value: "email" },
+          ],
+        },
+        label: {
+          type: "text",
+        },
+      },
+      defaultProps: {
+        type: "text",
+        label: "Add your label text",
+      },
+      render: ({ type, label }) => {
+        return (
+          <div className="p-6">
+            <label>{label}</label>
+            <br />
+            <input type={type} placeholder="Placeholder" />
+          </div>
+        );
+      },
+    },
+    Select: {
+      fields: {
+        options: {
+          type: "array",
+          arrayFields: {
+            title: { type: "text" },
+          },
+        },
+        label: {
+          type: "text",
+        },
+      },
+      defaultProps: {
+        options: [],
+        label: "Add your label text",
+      },
+      render: ({ options, label }) => {
+        return (
+          <div className="p-6">
+            <label>{label}</label>
+            <br />
+            <select>
+              {options.map((option) => (
+                <option key={option.title} value={option.title}>
+                  {option.title}
+                </option>
+              ))}
+            </select>
+          </div>
+        );
+      },
+    },
+    Textarea: {
+      fields: {
+        text: {
+          type: "textarea",
+        },
+      },
+      render: ({ text }) => {
+        return (
+          <textarea rows="10" cols="50">
+            {text}
+          </textarea>
+        );
       },
     },
     Image: {
@@ -245,6 +341,62 @@ export const config: Config<Props> = {
         return <Information information={information} />;
       },
     },
+    Container: {
+      fields: {
+        width: { type: "text" },
+        height: { type: "text" },
+        backgroundColor: { type: "text" },
+      },
+      defaultProps: {
+        width: "100%",
+        height: "500px",
+        backgroundColor: "red",
+      },
+      render: ({ width, height, backgroundColor }) => {
+        return (
+          <section
+            style={{
+              width,
+              height,
+              backgroundColor,
+            }}
+          >
+            <DropZone zone="container" />
+          </section>
+        );
+      },
+    },
+    Column: {
+      fields: {
+        width: { type: "text" },
+        height: { type: "text" },
+        backgroundColor: { type: "text" },
+      },
+      render: ({ width, height, backgroundColor }) => {
+        return (
+          <div
+            style={{
+              width,
+              height,
+              backgroundColor,
+            }}
+          >
+            <DropZone zone="column" />
+          </div>
+        );
+      },
+    },
+  },
+  categories: {
+    basic: {
+      components: ["Paragraph", "Image", "Button"],
+    },
+    form: {
+      components: ["Field", "Textarea", "Select"],
+    },
+    layout: {
+      components: ["Menu", "Container", "Column"],
+    },
   },
   root: {
     render: ({ children }) => {
@@ -256,7 +408,7 @@ export const config: Config<Props> = {
           <DropZone zone="Timeline" />
           <DropZone zone="Timer" />
           <DropZone zone="Information" />
-          {/* <Contact /> */}
+          <Contact />
           <Gallery />
           {children}
         </div>
