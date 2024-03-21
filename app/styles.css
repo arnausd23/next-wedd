@@ -71,6 +71,13 @@ div[class^="_DraggableComponent-actions"] {
   height: initial;
 }
 
+/* CSS fix for column component alignment */
+[data-rfd-droppable-id^="Column"] {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 /* Override styles to add imgs */
 div._DrawerItem-draggable_1qydx_1 {
   background: transparent;

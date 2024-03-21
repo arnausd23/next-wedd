@@ -60,6 +60,7 @@ type Props = {
     width: string;
     height: string;
     backgroundColor: string;
+    backgroundImage: any;
     columns: Number;
   };
   Column: {
@@ -370,14 +371,35 @@ export const config: Config<Props> = {
         width: { type: "text" },
         height: { type: "text" },
         backgroundColor: { type: "text" },
+        backgroundImage: {
+          type: "custom",
+          render: ({ name, onChange, value }) => (
+            <FileUploader name={name} onChange={onChange} />
+          ),
+        },
+        backgroundImageMode: {
+          type: "radio",
+          options: [
+            { label: "Cover", value: "cover" },
+            { label: "Contain", value: "contain" },
+          ],
+        },
         columns: { type: "number" },
       },
       defaultProps: {
         width: "100%",
         height: "auto",
         columns: 2,
+        backgroundImageMode: "contain",
       },
-      render: ({ width, height, backgroundColor, columns }) => {
+      render: ({
+        width,
+        height,
+        backgroundColor,
+        backgroundImage,
+        backgroundImageMode,
+        columns,
+      }) => {
         return (
           <section
             className="grid"
@@ -385,6 +407,8 @@ export const config: Config<Props> = {
               width,
               height,
               backgroundColor,
+              backgroundImage: `url(/uploads/${backgroundImage})`,
+              backgroundSize: backgroundImageMode,
               gridTemplateColumns: `repeat(${columns}, 1fr)`,
             }}
           >
@@ -420,7 +444,7 @@ export const config: Config<Props> = {
       render: ({ width, height, backgroundColor }) => {
         return (
           <div
-            className="column-widget flex flex-col"
+            className="column-widget flex flex-col overflow-hidden"
             style={{
               width,
               height,
@@ -461,9 +485,9 @@ export const config: Config<Props> = {
           {/* <JoinUs /> */}
           <DropZone zone="Timeline" />
           <DropZone zone="Timer" />
-          <DropZone zone="Information" />
+          {/* <DropZone zone="Information" /> */}
           <Contact />
-          <Gallery />
+          {/* <Gallery /> */}
           {children}
         </div>
         // <div>
