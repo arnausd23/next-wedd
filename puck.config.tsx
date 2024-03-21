@@ -67,10 +67,26 @@ type Props = {
     height: string;
     backgroundColor: string;
   };
+  VerticalSpacing: {
+    height: string;
+  };
 };
 
 export const config: Config<Props> = {
   components: {
+    VerticalSpacing: {
+      fields: {
+        height: {
+          type: "text",
+        },
+      },
+      defaultProps: {
+        height: "10px",
+      },
+      render: ({ height }) => {
+        return <div style={{ height }} />;
+      },
+    },
     Paragraph: {
       fields: {
         text: {
@@ -170,12 +186,12 @@ export const config: Config<Props> = {
         file: {
           type: "custom",
           render: ({ name, onChange, value }) => (
-            <>
-              <FileUploader name={name} onChange={onChange} />
-            </>
+            <FileUploader name={name} onChange={onChange} />
           ),
         },
         url: { type: "text" },
+        width: { type: "text" },
+        height: { type: "text" },
         mode: {
           type: "radio",
           options: [
@@ -188,14 +204,21 @@ export const config: Config<Props> = {
         file: null,
         url: "",
         mode: "inline",
+        width: "auto",
+        height: "auto",
       },
-      render: ({ url, mode, file }) => {
+      render: ({ url, mode, file, width, height }) => {
         return (
           <>
             {file && (
-              <>
-                <img src={"/uploads/" + file} alt="" />
-              </>
+              <img
+                src={"/uploads/" + file}
+                alt="Uploaded image"
+                style={{
+                  height,
+                  width,
+                }}
+              />
             )}
           </>
         );
@@ -351,7 +374,7 @@ export const config: Config<Props> = {
       },
       defaultProps: {
         width: "100%",
-        height: "500px",
+        height: "auto",
         columns: 2,
       },
       render: ({ width, height, backgroundColor, columns }) => {
@@ -377,17 +400,36 @@ export const config: Config<Props> = {
         width: { type: "text" },
         height: { type: "text" },
         backgroundColor: { type: "text" },
+        horizontalContentAlignment: {
+          type: "radio",
+          options: [
+            { label: "Start", value: "inline" },
+            { label: "Center", value: "background" },
+            { label: "End", value: "background" },
+          ],
+        },
+        verticalContentAlignment: {
+          type: "radio",
+          options: [
+            { label: "Start", value: "inline" },
+            { label: "Center", value: "background" },
+            { label: "End", value: "background" },
+          ],
+        },
       },
       render: ({ width, height, backgroundColor }) => {
         return (
           <div
+            className="column-widget flex flex-col"
             style={{
               width,
               height,
               backgroundColor,
+              alignItems: "center",
+              justifyContent: "center",
             }}
           >
-            <DropZone zone="column" />
+            <DropZone zone="Column" />
           </div>
         );
       },
@@ -395,7 +437,7 @@ export const config: Config<Props> = {
   },
   categories: {
     basic: {
-      components: ["Paragraph", "Image", "Button"],
+      components: ["Paragraph", "Image", "Button", "VerticalSpacing"],
     },
     form: {
       components: ["Field", "Textarea", "Select"],
@@ -413,8 +455,10 @@ export const config: Config<Props> = {
       return (
         <div>
           <DropZone zone="navbar" />
-          <Home />
-          <JoinUs />
+          <DropZone zone="Home" />
+          {/* <Home /> */}
+          <DropZone zone="JoinUs" />
+          {/* <JoinUs /> */}
           <DropZone zone="Timeline" />
           <DropZone zone="Timer" />
           <DropZone zone="Information" />
@@ -422,6 +466,17 @@ export const config: Config<Props> = {
           <Gallery />
           {children}
         </div>
+        // <div>
+        //   <DropZone zone="navbar" />
+        // <Home />
+        //   <JoinUs />
+        //   <DropZone zone="Timeline" />
+        //   <DropZone zone="Timer" />
+        //   <DropZone zone="Information" />
+        //   <Contact />
+        //   <Gallery />
+        //   {children}
+        // </div>
       );
     },
   },

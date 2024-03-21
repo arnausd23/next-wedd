@@ -10,6 +10,7 @@ const Example = ({ placeholder, onChange, value }) => {
     () => ({
       readonly: false,
       placeholder: placeholder || "Start typings...",
+      colorPickerDefaultTab: "color",
     }),
     [placeholder]
   );

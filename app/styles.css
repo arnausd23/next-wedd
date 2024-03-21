@@ -29,6 +29,7 @@ h4,
 h5,
 h6,
 span,
+strong,
 h3 p,
 h2 p {
   font-family: "serif", sans-serif;
@@ -51,9 +52,27 @@ p {
 .Puck .home-section {
   margin-top: 0;
 }
+div[class^="_DropZone-item"],
+div[data-rfd-draggable-id^="draggable-Column"],
+div[class^="_DraggableComponent-contents"],
+div[class^="_DropZone-renderWrapper"] {
+  height: inherit;
+}
+
+.column-widget > div {
+  height: fit-content;
+}
+
+div[class^="_DraggableComponent-overlay"] {
+  position: absolute !important;
+}
+
+div[class^="_DraggableComponent-actions"] {
+  height: initial;
+}
 
 /* Override styles to add imgs */
-._DrawerItem-draggable_1qydx_1 {
+div._DrawerItem-draggable_1qydx_1 {
   background: transparent;
   padding: 0;
   display: flex;
