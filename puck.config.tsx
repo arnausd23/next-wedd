@@ -117,6 +117,9 @@ export const config: Config<Props> = {
     },
     Field: {
       fields: {
+        label: {
+          type: "text",
+        },
         type: {
           type: "select",
           options: [
@@ -124,9 +127,6 @@ export const config: Config<Props> = {
             { label: "Text", value: "text" },
             { label: "Email", value: "email" },
           ],
-        },
-        label: {
-          type: "text",
         },
       },
       defaultProps: {
@@ -147,14 +147,14 @@ export const config: Config<Props> = {
     },
     Select: {
       fields: {
+        label: {
+          type: "text",
+        },
         options: {
           type: "array",
           arrayFields: {
             title: { type: "text" },
           },
-        },
-        label: {
-          type: "text",
         },
       },
       defaultProps: {
@@ -163,31 +163,45 @@ export const config: Config<Props> = {
       },
       render: ({ options, label }) => {
         return (
-          <div className="p-6">
-            <label>{label}</label>
-            <br />
-            <select>
+          <fieldset className="flex flex-col mb-10">
+            <label className="mb-2">{label}</label>
+            <select
+              defaultValue="default"
+              className="cursor-pointer bg-[#f6f6f6] rounded-md p-2 focus-visible:outline-[#eaeaea]"
+            >
+              <option disabled value="default">
+                -- select an option --
+              </option>
               {options.map((option) => (
                 <option key={option.title} value={option.title}>
                   {option.title}
                 </option>
               ))}
             </select>
-          </div>
+          </fieldset>
         );
       },
     },
     Textarea: {
       fields: {
+        label: {
+          type: "text",
+        },
         text: {
           type: "textarea",
         },
       },
-      render: ({ text }) => {
+      render: ({ label, text }) => {
         return (
-          <textarea rows="10" cols="50">
-            {text}
-          </textarea>
+          <fieldset className="flex flex-col mb-10">
+            <label className="mb-2">{label}</label>
+            <textarea
+              className="bg-[#f6f6f6] rounded-md p-2 focus-visible:outline-[#eaeaea]"
+              rows="3"
+              cols="40"
+              value={text}
+            ></textarea>
+          </fieldset>
         );
       },
     },
