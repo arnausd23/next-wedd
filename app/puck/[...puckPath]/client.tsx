@@ -16,6 +16,31 @@ export function Client({ path, data }: { path: string; data: Data }) {
         config={config}
         data={data}
         overrides={{
+          fields: ({ children }) => {
+            let elementsToRender = children;
+            const exists = children.find((child) =>
+              child.key.includes("Form-")
+            );
+
+            if (exists) {
+              const newKeyToAdd = "Select options";
+              children[0].props.value.map(({ inputType }) => {
+                if (inputType === "select") {
+                  elementsToRender[0].props.field.arrayFields[newKeyToAdd] = {
+                    type: "array",
+                    arrayFields: {
+                      title: { type: "text" },
+                    },
+                  };
+                } else {
+                  delete elementsToRender[0].props.field.arrayFields[
+                    newKeyToAdd
+                  ];
+                }
+              });
+            }
+            return <div>{elementsToRender}</div>;
+          },
           componentItem: ({ children }) => {
             const componentType =
               children?.props?.children.props.children[0].props.children;
