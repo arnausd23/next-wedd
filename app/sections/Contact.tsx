@@ -2,6 +2,12 @@
 
 import Button from "../components/Button";
 
+interface ContactFormResponse {
+  fullName: string;
+  comment: string;
+  menu: string;
+}
+
 function Contact() {
   const handleSubmit = async () => {
     const form = document.getElementById("contact");
@@ -18,8 +24,15 @@ function Contact() {
       data[select.id] = select.value;
     }
 
-    console.log(data);
-    // await notionPostAttendance(data);
+    fetch(`/api/csv`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data));
   };
 
   return (

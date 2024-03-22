@@ -67,6 +67,15 @@ type Props = {
     width: string;
     height: string;
     backgroundColor: string;
+    horitzontalContentAlignment: string;
+    verticalContentAlignment: string;
+  };
+  Row: {
+    width: string;
+    height: string;
+    backgroundColor: string;
+    horitzontalContentAlignment: string;
+    verticalContentAlignment: string;
   };
   VerticalSpacing: {
     height: string;
@@ -196,8 +205,8 @@ export const config: Config<Props> = {
         mode: {
           type: "radio",
           options: [
-            { label: "Inline", value: "inline" },
-            { label: "Background", value: "background" },
+            { label: "Regular", value: "regular" },
+            { label: "Rounded", value: "rounded" },
           ],
         },
       },
@@ -211,13 +220,23 @@ export const config: Config<Props> = {
       render: ({ url, mode, file, width, height }) => {
         return (
           <>
-            {file && (
+            {file && mode !== "rounded" && (
               <img
                 src={"/uploads/" + file}
                 alt="Uploaded image"
                 style={{
                   height,
                   width,
+                }}
+              />
+            )}
+            {file && mode === "rounded" && (
+              <div
+                className="rounded-full bg-cover bg-center"
+                style={{
+                  height,
+                  width,
+                  backgroundImage: `url(/uploads/${file})`,
                 }}
               />
             )}
@@ -427,6 +446,58 @@ export const config: Config<Props> = {
         horizontalContentAlignment: {
           type: "radio",
           options: [
+            { label: "Start", value: "start" },
+            { label: "Center", value: "center" },
+            { label: "End", value: "end" },
+          ],
+        },
+        verticalContentAlignment: {
+          type: "radio",
+          options: [
+            { label: "Start", value: "start" },
+            { label: "Center", value: "center" },
+            { label: "End", value: "end" },
+          ],
+        },
+      },
+      defaultProps: {
+        horizontalContentAlignment: "start",
+        verticalContentAlignment: "start",
+      },
+      render: ({
+        width,
+        height,
+        backgroundColor,
+        horizontalContentAlignment,
+        verticalContentAlignment,
+      }) => {
+        return (
+          <div
+            className={
+              "column-widget flex flex-col overflow-hidden" +
+              ` items-${horizontalContentAlignment}`
+            }
+            style={{
+              width,
+              height,
+              backgroundColor,
+              alignItems: horizontalContentAlignment,
+              justifyContent: verticalContentAlignment,
+            }}
+          >
+            <DropZone zone="Column" />
+          </div>
+        );
+      },
+    },
+    Row: {
+      fields: {
+        width: { type: "text" },
+        height: { type: "text" },
+        backgroundColor: { type: "text" },
+        horizontalContentAlignment: {
+          type: "radio",
+          options: [
             { label: "Start", value: "inline" },
             { label: "Center", value: "background" },
             { label: "End", value: "background" },
@@ -441,19 +512,25 @@ export const config: Config<Props> = {
           ],
         },
       },
-      render: ({ width, height, backgroundColor }) => {
+      render: ({
+        width,
+        height,
+        backgroundColor,
+        horizontalContentAlignment,
+        verticalContentAlignment,
+      }) => {
         return (
           <div
-            className="column-widget flex flex-col overflow-hidden"
+            className="row-widget flex overflow-hidden"
             style={{
               width,
               height,
               backgroundColor,
-              alignItems: "center",
-              justifyContent: "center",
+              alignItems: horizontalContentAlignment,
+              justifyContent: verticalContentAlignment,
             }}
           >
-            <DropZone zone="Column" />
+            <DropZone zone="Row" />
           </div>
         );
       },
@@ -463,11 +540,11 @@ export const config: Config<Props> = {
     basic: {
       components: ["Paragraph", "Image", "Button", "VerticalSpacing"],
     },
+    layout: {
+      components: ["Menu", "Container", "Column", "Row"],
+    },
     form: {
       components: ["Field", "Textarea", "Select"],
-    },
-    layout: {
-      components: ["Menu", "Container", "Column"],
     },
     customSections: {
       title: "Custom sections",
@@ -478,18 +555,13 @@ export const config: Config<Props> = {
     render: ({ children }) => {
       return (
         <div>
-          <DropZone zone="navbar" />
-          <DropZone zone="Home" />
           {/* <Home /> */}
-          <DropZone zone="JoinUs" />
           {/* <JoinUs /> */}
-          <DropZone zone="Timeline" />
-          <DropZone zone="Timer" />
-          {/* <DropZone zone="Information" /> */}
           <Contact />
           {/* <Gallery /> */}
           {children}
         </div>
+
         // <div>
         //   <DropZone zone="navbar" />
         // <Home />

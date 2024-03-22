@@ -67,6 +67,11 @@ div[class^="_DraggableComponent-overlay"] {
   position: absolute !important;
 }
 
+div[class^="_DrawerItem-draggable"] {
+  background-color: transparent !important;
+  color: initial !important;
+}
+
 div[class^="_DraggableComponent-actions"] {
   height: initial;
 }
@@ -76,6 +81,13 @@ div[class^="_DraggableComponent-actions"] {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.items-end [data-rfd-droppable-id^="Column"] {
+  align-items: flex-end;
+}
+.items-start [data-rfd-droppable-id^="Column"] {
+  align-items: flex-start;
 }
 
 /* Override styles to add imgs */

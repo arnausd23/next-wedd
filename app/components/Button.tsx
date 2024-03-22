@@ -15,7 +15,7 @@ function Button({ text, link, className, onClick, children }: ButtonProps) {
       rel="noreferrer"
       href={link}
       className={
-        "cursor-pointer inline-block bg-green text-white py-5 px-12 font-bold " +
+        "cursor-pointer inline-block bg-green text-white py-5 px-12 font-bold w-fit " +
         className
       }
       onClick={onClick}
