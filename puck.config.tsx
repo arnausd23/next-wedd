@@ -13,6 +13,7 @@ import Button from "./app/components/Button";
 import Timer from "./app/sections/Timer";
 import Information from "./app/sections/Information";
 import Contact from "./app/sections/Contact";
+import Form from "./app/components/Puck/Form";
 
 const Editor = dynamic(() => import("./app/components/Puck/Editor"), {
   ssr: false,
@@ -201,49 +202,8 @@ export const config: Config<Props> = {
       defaultProps: {
         options: [],
       },
-      render: ({ options, label }) => {
-        return (
-          <>
-            {options.map((option, index) => {
-              if (option.inputType === "select") {
-                return (
-                  <fieldset
-                    key={`fieldset-${index}`}
-                    className="w-full flex flex-col mb-10"
-                  >
-                    <label className="mb-2">{option.label}</label>
-                    <select
-                      defaultValue="default"
-                      className="cursor-pointer bg-[#f6f6f6] rounded-md p-2 focus-visible:outline-[#eaeaea]"
-                    >
-                      <option disabled value="default">
-                        -- select an option --
-                      </option>
-                      {option["Select options"].map((op) => (
-                        <option key={op.title} value={op.title}>
-                          {op.title}
-                        </option>
-                      ))}
-                    </select>
-                  </fieldset>
-                );
-              } else {
-                return (
-                  <fieldset
-                    key={`fieldset-${index}`}
-                    className="w-full flex flex-col mb-10"
-                  >
-                    <label className="mb-2">{option.label}</label>
-                    <input
-                      className="bg-[#f6f6f6] rounded-md p-2 focus-visible:outline-[#eaeaea]"
-                      type="text"
-                    />
-                  </fieldset>
-                );
-              }
-            })}
-          </>
-        );
+      render: ({ options }) => {
+        return <Form options={options} />;
       },
     },
     Textarea: {

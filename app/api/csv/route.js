@@ -5,9 +5,8 @@ import { writeFile, appendFile } from "fs/promises";
 export const POST = async (req, res) => {
   const body = await req.json()
 
-  const { fullName, comment, menu } = body;
   const rows = [
-    [fullName, comment, menu],
+    body,
   ];
 
   const csvContent = rows.map((e) => e.join(",")).join("\n");
