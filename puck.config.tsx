@@ -519,15 +519,15 @@ export const config: Config<Props> = {
         return (
           <div
             className={
-              "column-widget flex flex-col overflow-hidden py-12 px-24" +
+              "column-widget grid overflow-hidden py-12 px-24" +
               ` items-${horizontalContentAlignment}`
             }
             style={{
               width,
               height,
               backgroundColor,
-              alignItems: horizontalContentAlignment,
-              justifyContent: verticalContentAlignment,
+              justifyContent: horizontalContentAlignment,
+              alignContent: verticalContentAlignment,
             }}
           >
             <DropZone zone="Column" />
@@ -557,16 +557,21 @@ export const config: Config<Props> = {
         return (
           <section className="overlay relative">
             <section className="relative grid grid-cols-2 lg:grid-cols-3">
-              {images.map(({image}) => (
-                <img src={"/uploads/" + image} alt="Gallery overlay background image" />
+              {images.map(({ image }) => (
+                <img
+                  src={"/uploads/" + image}
+                  alt="Gallery overlay background image"
+                />
               ))}
               <div
                 className="absolute top-0 bottom-0 left-0 right-0 bg-black opacity-65"
                 style={{ backgroundColor: backgroundColor }}
               />
-              <div className={`overlay-content absolute top-1/2 -translate-y-1/2 lg:left-1/2 lg:center-absolute text-center p-12 ${images.length > 0
-                  ? "hasImages"
-                  : ""}`}>
+              <div
+                className={`overlay-content absolute top-1/2 -translate-y-1/2 lg:left-1/2 lg:center-absolute text-center p-12 ${
+                  images.length > 0 ? "hasImages" : ""
+                }`}
+              >
                 <h2 className="text-xl lg:text-3xl text-white">
                   <DropZone zone="gallery-content" />
                 </h2>
