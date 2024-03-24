@@ -12,7 +12,8 @@ function Form({ options, buttonText, buttonColor }) {
     const form = document.forms[formName];
     const formData = new FormData(form);
 
-    let values = [];
+    let values: string[] = [];
+
     for (let [name, value] of formData.entries()) {
       values.push(`${name} ${value}`);
     }
@@ -80,7 +81,7 @@ function Form({ options, buttonText, buttonColor }) {
           text={buttonText}
           onClick={handleSubmit}
           style={{
-            backgroundColor: buttonColor
+            backgroundColor: buttonColor,
           }}
         />
       </form>

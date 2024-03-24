@@ -6,6 +6,7 @@ interface ButtonProps {
   className?: string;
   onClick?: () => void;
   children?: ReactElement;
+  style?: any;
 }
 
 function Button({
@@ -14,7 +15,7 @@ function Button({
   className,
   onClick,
   children,
-  ...props
+  style,
 }: ButtonProps) {
   return (
     <a
@@ -26,7 +27,7 @@ function Button({
         className
       }
       onClick={onClick}
-      {...props}
+      style={style}
     >
       {children}
       {text}

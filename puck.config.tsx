@@ -1,19 +1,15 @@
 // @ts-nocheck
 
-import dynamic from "next/dynamic";
 import { DropZone, type Config } from "@measured/puck";
-import Home from "./app/sections/Home";
-import Image from "next/image";
-import FileUploader from "./app/components/Puck/FileUploader";
-import Navbar from "./app/components/Navbar";
-import JoinUs from "./app/sections/JoinUs";
-import Timeline from "./app/sections/Timeline";
-import Gallery from "./app/sections/Gallery";
+import dynamic from "next/dynamic";
 import Button from "./app/components/Button";
-import Timer from "./app/sections/Timer";
-import Information from "./app/sections/Information";
-import Contact from "./app/sections/Contact";
+import Navbar from "./app/components/Navbar";
+import FileUploader from "./app/components/Puck/FileUploader";
 import Form from "./app/components/Puck/Form";
+import Information from "./app/sections/Information";
+import Timeline from "./app/sections/Timeline";
+import Timer from "./app/sections/Timer";
+import HomeText from "./app/components/Puck/HomeText";
 
 const Editor = dynamic(() => import("./app/components/Puck/Editor"), {
   ssr: false,
@@ -111,6 +107,24 @@ export const config: Config<Props> = {
       },
       render: ({ text }) => {
         return <div dangerouslySetInnerHTML={{ __html: text }}></div>;
+      },
+    },
+    ParagraphWithBackground: {
+      fields: {
+        text: {
+          type: "custom",
+          render: ({ name, onChange, value }) => {
+            return (
+              <Editor placeholder={"Lorem"} onChange={onChange} value={value} />
+            );
+          },
+        },
+      },
+      defaultProps: {
+        text: "Paragraph",
+      },
+      render: ({ text }) => {
+        return <HomeText text={text} />;
       },
     },
     Field: {
@@ -557,8 +571,9 @@ export const config: Config<Props> = {
         return (
           <section className="overlay relative">
             <section className="relative grid grid-cols-2 lg:grid-cols-3">
-              {images.map(({ image }) => (
+              {images.map(({ image, index }) => (
                 <img
+                  key={image + index}
                   src={"/uploads/" + image}
                   alt="Gallery overlay background image"
                 />
@@ -600,27 +615,7 @@ export const config: Config<Props> = {
   },
   root: {
     render: ({ children }) => {
-      return (
-        <div>
-          {/* <Home /> */}
-          {/* <JoinUs /> */}
-          {/* <Contact /> */}
-          {/* <Gallery /> */}
-          {children}
-        </div>
-
-        // <div>
-        //   <DropZone zone="navbar" />
-        // <Home />
-        //   <JoinUs />
-        //   <DropZone zone="Timeline" />
-        //   <DropZone zone="Timer" />
-        //   <DropZone zone="Information" />
-        //   <Contact />
-        //   <Gallery />
-        //   {children}
-        // </div>
-      );
+      return <div>{children}</div>;
     },
   },
 };
