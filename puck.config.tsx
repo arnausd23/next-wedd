@@ -519,15 +519,15 @@ export const config: Config<Props> = {
         return (
           <div
             className={
-              "column-widget grid overflow-hidden py-12 px-24" +
+              "column-widget flex flex-col overflow-hidden py-12 px-24" +
               ` items-${horizontalContentAlignment}`
             }
             style={{
               width,
               height,
               backgroundColor,
-              justifyContent: horizontalContentAlignment,
-              alignContent: verticalContentAlignment,
+              alignItems: horizontalContentAlignment,
+              justifyContent: verticalContentAlignment,
             }}
           >
             <DropZone zone="Column" />

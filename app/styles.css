@@ -95,6 +95,21 @@ div[class^="_DraggableComponent-actions"] {
   flex-direction: column;
   align-items: center;
 }
+
+.column-widget[style*="align-items: end"]
+  [class^="_DraggableComponent-contents"]
+  > [class^="_DropZone-renderWrapper"] {
+  display: flex;
+  justify-content: end;
+}
+
+.column-widget[style*="align-items: start"]
+  [class^="_DraggableComponent-contents"]
+  > [class^="_DropZone-renderWrapper"] {
+  display: flex;
+  justify-content: start;
+}
+
 [class^="_DropZone-renderWrapper"] {
   display: flex;
   justify-content: center;
