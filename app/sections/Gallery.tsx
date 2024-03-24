@@ -19,7 +19,7 @@ function Gallery() {
         <Image src={gallery5} alt="Gallery example Image" />
         <Image src={gallery6} alt="Gallery example Image" />
         <div className="absolute top-0 bottom-0 left-0 right-0 bg-black opacity-65" />
-        <div className="absolute top-1/2 -translate-y-1/2 lg:left-1/2 lg:center-absolute text-center p-12">
+        <div className="overlay-content absolute top-1/2 -translate-y-1/2 lg:left-1/2 lg:center-absolute text-center p-12">
           <h2 className="text-xl lg:text-3xl text-white">
             <DropZone zone="gallery-content" />
           </h2>

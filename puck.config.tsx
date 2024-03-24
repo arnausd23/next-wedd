@@ -71,12 +71,9 @@ type Props = {
     horitzontalContentAlignment: string;
     verticalContentAlignment: string;
   };
-  Row: {
-    width: string;
-    height: string;
+  Overlay: {
+    images: string;
     backgroundColor: string;
-    horitzontalContentAlignment: string;
-    verticalContentAlignment: string;
   };
   VerticalSpacing: {
     height: string;
@@ -198,12 +195,20 @@ export const config: Config<Props> = {
             },
           },
         },
+        buttonText: { type: "text" },
+        buttonColor: { type: "text" },
       },
       defaultProps: {
         options: [],
       },
-      render: ({ options }) => {
-        return <Form options={options} />;
+      render: ({ options, buttonText, buttonColor }) => {
+        return (
+          <Form
+            options={options}
+            buttonText={buttonText}
+            buttonColor={buttonColor}
+          />
+        );
       },
     },
     Textarea: {
@@ -499,6 +504,8 @@ export const config: Config<Props> = {
         },
       },
       defaultProps: {
+        width: "100%",
+        height: "auto",
         horizontalContentAlignment: "start",
         verticalContentAlignment: "start",
       },
@@ -512,7 +519,7 @@ export const config: Config<Props> = {
         return (
           <div
             className={
-              "column-widget flex flex-col overflow-hidden" +
+              "column-widget flex flex-col overflow-hidden py-12 px-24" +
               ` items-${horizontalContentAlignment}`
             }
             style={{
@@ -528,48 +535,45 @@ export const config: Config<Props> = {
         );
       },
     },
-    Row: {
+    Overlay: {
       fields: {
-        width: { type: "text" },
-        height: { type: "text" },
+        images: {
+          type: "array",
+          arrayFields: {
+            image: {
+              type: "custom",
+              render: ({ name, onChange, value }) => (
+                <FileUploader name={name} onChange={onChange} />
+              ),
+            },
+          },
+        },
         backgroundColor: { type: "text" },
-        horizontalContentAlignment: {
-          type: "radio",
-          options: [
-            { label: "Start", value: "inline" },
-            { label: "Center", value: "background" },
-            { label: "End", value: "background" },
-          ],
-        },
-        verticalContentAlignment: {
-          type: "radio",
-          options: [
-            { label: "Start", value: "inline" },
-            { label: "Center", value: "background" },
-            { label: "End", value: "background" },
-          ],
-        },
       },
-      render: ({
-        width,
-        height,
-        backgroundColor,
-        horizontalContentAlignment,
-        verticalContentAlignment,
-      }) => {
+      defaultProps: {
+        images: [],
+      },
+      render: ({ images, backgroundColor }) => {
         return (
-          <div
-            className="row-widget flex overflow-hidden"
-            style={{
-              width,
-              height,
-              backgroundColor,
-              alignItems: horizontalContentAlignment,
-              justifyContent: verticalContentAlignment,
-            }}
-          >
-            <DropZone zone="Row" />
-          </div>
+          <section className="overlay relative">
+            <section className="relative grid grid-cols-2 lg:grid-cols-3">
+              {images.map(({image}) => (
+                <img src={"/uploads/" + image} alt="Gallery overlay background image" />
+              ))}
+              <div
+                className="absolute top-0 bottom-0 left-0 right-0 bg-black opacity-65"
+                style={{ backgroundColor: backgroundColor }}
+              />
+              <div className={`overlay-content absolute top-1/2 -translate-y-1/2 lg:left-1/2 lg:center-absolute text-center p-12 ${images.length > 0
+                  ? "hasImages"
+                  : ""}`}>
+                <h2 className="text-xl lg:text-3xl text-white">
+                  <DropZone zone="gallery-content" />
+                </h2>
+                <DropZone zone="gallery-button" />
+              </div>
+            </section>
+          </section>
         );
       },
     },
@@ -579,7 +583,7 @@ export const config: Config<Props> = {
       components: ["Paragraph", "Image", "Button", "VerticalSpacing"],
     },
     layout: {
-      components: ["Menu", "Container", "Column", "Row"],
+      components: ["Menu", "Container", "Column"],
     },
     form: {
       components: ["Field", "Textarea", "Select"],
@@ -595,7 +599,7 @@ export const config: Config<Props> = {
         <div>
           {/* <Home /> */}
           {/* <JoinUs /> */}
-          <Contact />
+          {/* <Contact /> */}
           {/* <Gallery /> */}
           {children}
         </div>

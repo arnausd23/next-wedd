@@ -57,6 +57,7 @@ div[data-rfd-draggable-id^="draggable-Column"],
 div[class^="_DraggableComponent-contents"],
 div[class^="_DropZone-renderWrapper"] {
   height: inherit;
+  width: 100%;
 }
 
 .column-widget > div {
@@ -76,11 +77,27 @@ div[class^="_DraggableComponent-actions"] {
   height: initial;
 }
 
+/* Fix for overlay */
+[class^="_DropZone-renderWrapper"] .overlay-content:not(.hasImages) {
+  position: inherit;
+  transform: translate(0);
+  left: 100%;
+  top: 0;
+  height: fit-content;
+}
+[class^="_DropZone-renderWrapper"] > .overlay {
+  width: 100%;
+}
+
 /* CSS fix for column component alignment */
 [data-rfd-droppable-id^="Column"] {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+[class^="_DropZone-renderWrapper"] {
+  display: flex;
+  justify-content: center;
 }
 
 .items-end [data-rfd-droppable-id^="Column"] {

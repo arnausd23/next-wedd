@@ -8,7 +8,14 @@ interface ButtonProps {
   children?: ReactElement;
 }
 
-function Button({ text, link, className, onClick, children }: ButtonProps) {
+function Button({
+  text,
+  link,
+  className,
+  onClick,
+  children,
+  ...props
+}: ButtonProps) {
   return (
     <a
       target="_blank"
@@ -19,6 +26,7 @@ function Button({ text, link, className, onClick, children }: ButtonProps) {
         className
       }
       onClick={onClick}
+      {...props}
     >
       {children}
       {text}
