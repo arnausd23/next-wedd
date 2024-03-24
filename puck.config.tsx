@@ -444,6 +444,7 @@ export const config: Config<Props> = {
     },
     Container: {
       fields: {
+        id: { type: "text" },
         width: { type: "text" },
         height: { type: "text" },
         backgroundColor: { type: "text" },
@@ -475,9 +476,11 @@ export const config: Config<Props> = {
         backgroundImage,
         backgroundImageMode,
         columns,
+        id,
       }) => {
         return (
           <section
+            id={id}
             className="grid"
             style={{
               width,
