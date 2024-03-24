@@ -2,7 +2,7 @@ import InformationColumn from "../components/InformationColumn";
 
 function Information({ information }) {
   return (
-    <section id="information">
+    <section className="w-full">
       <div
         className="w-full h-40 lg:h-96 bg-cover bg-center"
         style={{ backgroundImage: `url('/uploads/information.jpg')` }}
