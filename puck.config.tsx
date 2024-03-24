@@ -481,7 +481,7 @@ export const config: Config<Props> = {
         return (
           <section
             id={id}
-            className="grid"
+            className="grid max-sm:!grid-cols-1"
             style={{
               width,
               height,
@@ -536,7 +536,7 @@ export const config: Config<Props> = {
         return (
           <div
             className={
-              "column-widget flex flex-col overflow-hidden py-12 px-24" +
+              "column-widget flex flex-col overflow-hidden sm:py-12 sm:px-24" +
               ` items-${horizontalContentAlignment}`
             }
             style={{
