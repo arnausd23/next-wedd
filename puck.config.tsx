@@ -15,8 +15,11 @@ const Editor = dynamic(() => import("./app/components/Puck/Editor"), {
   ssr: false,
 });
 
-type Props = {
+export type Props = {
   Paragraph: {
+    text: string;
+  };
+  ParagraphWithBackground: {
     text: string;
   };
   Image: {
@@ -42,16 +45,6 @@ type Props = {
   };
   Information: {
     information: any[];
-  };
-  Field: {
-    type: string;
-  };
-  Textarea: {
-    text: string;
-  };
-  Select: {
-    options: string[];
-    text: string;
   };
   Container: {
     width: string;
@@ -127,73 +120,6 @@ export const config: Config<Props> = {
         return <HomeText text={text} />;
       },
     },
-    Field: {
-      fields: {
-        label: {
-          type: "text",
-        },
-        type: {
-          type: "select",
-          options: [
-            { label: "Number", value: "number" },
-            { label: "Text", value: "text" },
-            { label: "Email", value: "email" },
-          ],
-        },
-      },
-      defaultProps: {
-        type: "text",
-        label: "Add your label text",
-      },
-      render: ({ type, label }) => {
-        return (
-          <fieldset className="flex flex-col mb-10">
-            <label className="mb-2">{label}</label>
-            <input
-              className="bg-[#f6f6f6] rounded-md p-2 focus-visible:outline-[#eaeaea]"
-              type={type}
-            />
-          </fieldset>
-        );
-      },
-    },
-    Select: {
-      fields: {
-        label: {
-          type: "text",
-        },
-        options: {
-          type: "array",
-          arrayFields: {
-            title: { type: "text" },
-          },
-        },
-      },
-      defaultProps: {
-        options: [],
-        label: "Add your label text",
-      },
-      render: ({ options, label }) => {
-        return (
-          <fieldset className="flex flex-col mb-10">
-            <label className="mb-2">{label}</label>
-            <select
-              defaultValue="default"
-              className="cursor-pointer bg-[#f6f6f6] rounded-md p-2 focus-visible:outline-[#eaeaea]"
-            >
-              <option disabled value="default">
-                -- select an option --
-              </option>
-              {options.map((option) => (
-                <option key={option.title} value={option.title}>
-                  {option.title}
-                </option>
-              ))}
-            </select>
-          </fieldset>
-        );
-      },
-    },
     Form: {
       fields: {
         options: {
@@ -222,29 +148,6 @@ export const config: Config<Props> = {
             buttonText={buttonText}
             buttonColor={buttonColor}
           />
-        );
-      },
-    },
-    Textarea: {
-      fields: {
-        label: {
-          type: "text",
-        },
-        text: {
-          type: "textarea",
-        },
-      },
-      render: ({ label, text }) => {
-        return (
-          <fieldset className="flex flex-col mb-10">
-            <label className="mb-2">{label}</label>
-            <textarea
-              className="bg-[#f6f6f6] rounded-md p-2 focus-visible:outline-[#eaeaea]"
-              rows="3"
-              cols="40"
-              value={text}
-            ></textarea>
-          </fieldset>
         );
       },
     },
@@ -603,17 +506,22 @@ export const config: Config<Props> = {
   },
   categories: {
     basic: {
-      components: ["Paragraph", "Image", "Button", "VerticalSpacing"],
+      title: "Basicos",
+      components: ["Paragraph", "Image", "Button", "VerticalSpacing", "Form"],
     },
     layout: {
+      title: "Estructura",
       components: ["Menu", "Container", "Column"],
     },
-    form: {
-      components: ["Field", "Textarea", "Select"],
-    },
     customSections: {
-      title: "Custom sections",
-      components: ["Grid", "Calendar", "Information"],
+      title: "Secciones personalizadas",
+      components: [
+        "Grid",
+        "Calendar",
+        "Information",
+        "Overlay",
+        "ParagraphWithBackground",
+      ],
     },
   },
   root: {

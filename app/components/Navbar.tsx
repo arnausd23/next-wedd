@@ -12,6 +12,21 @@ function Navbar({ logo, items }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [navLinks, setNavLinks] = useState<Navlinks[]>([]);
 
+  const preventAnchorAdd = (e) => {
+    e.preventDefault();
+    document.getElementsByTagName("body")[0].scrollIntoView();
+  };
+
+  useEffect(() => {
+    if (navLinks.length === 0) return;
+
+    document.addEventListener(".menu-link", preventAnchorAdd);
+
+    return () => {
+      document.removeEventListener(".menu-link", preventAnchorAdd);
+    };
+  }, [navLinks]);
+
   useEffect(() => {
     const navLinks: Navlinks[] = [];
     items.forEach((item) => {
@@ -44,7 +59,7 @@ function Navbar({ logo, items }) {
               <li key={item.label} className="max-lg:hidden">
                 <a
                   href={item.href}
-                  className="font-montserrat leading-normal text-lg hover:underline hover:underline-offset-4"
+                  className="menu-link font-montserrat leading-normal text-lg hover:underline hover:underline-offset-4"
                 >
                   {item.label}
                 </a>
@@ -84,7 +99,7 @@ function Navbar({ logo, items }) {
                 <li key={item.label} className="my-3">
                   <a
                     href={item.href}
-                    className="font-montserrat leading-normal text-3xl"
+                    className="menu-link font-montserrat leading-normal text-3xl"
                   >
                     {item.label}
                   </a>
