@@ -1,23 +1,25 @@
 // @ts-nocheck
-import "./styles.css";
-import React, { useCallback, useState } from "react";
 import classNames from "classnames";
+import { useCallback } from "react";
+import "./styles.css";
 // => Tiptap packages
-import { useEditor, EditorContent, Editor, BubbleMenu } from "@tiptap/react";
-import Document from "@tiptap/extension-document";
-import Paragraph from "@tiptap/extension-paragraph";
-import Text from "@tiptap/extension-text";
-import Link from "@tiptap/extension-link";
 import Bold from "@tiptap/extension-bold";
+import Document from "@tiptap/extension-document";
+import History from "@tiptap/extension-history";
+import Italic from "@tiptap/extension-italic";
+import Paragraph from "@tiptap/extension-paragraph";
+import Strike from "@tiptap/extension-strike";
+import Text from "@tiptap/extension-text";
 import TextAlign from "@tiptap/extension-text-align";
 import Underline from "@tiptap/extension-underline";
-import Italic from "@tiptap/extension-italic";
-import Strike from "@tiptap/extension-strike";
-import History from "@tiptap/extension-history";
+import { Editor, EditorContent, useEditor } from "@tiptap/react";
 // Custom
 
-import * as Icons from "../Icons/Editor/EditorIcons";
+import Color from "@tiptap/extension-color";
 import Heading from "@tiptap/extension-heading";
+import TextStyle from "@tiptap/extension-text-style";
+import * as Icons from "../Icons/Editor/EditorIcons";
+import { FontSize } from "./FontSize";
 
 function SimpleEditor({ placeholder, onChange, value }) {
   const editor = useEditor({
@@ -30,12 +32,17 @@ function SimpleEditor({ placeholder, onChange, value }) {
       Paragraph,
       Heading,
       Text,
+      TextStyle,
+      FontSize,
       Bold,
       Underline,
       Italic,
       Strike,
       TextAlign.configure({
         types: ["heading", "paragraph"],
+      }),
+      Color.configure({
+        types: ["textStyle"],
       }),
     ],
     content: value ? value : placeholder,
@@ -71,6 +78,21 @@ function SimpleEditor({ placeholder, onChange, value }) {
   return (
     <div className="editor">
       <div className="menu">
+        <button
+          className="menu-button"
+          onClick={() => editor.chain().focus().setFontSize(`120px`).run()}
+        >
+          Grande
+        </button>
+        <input
+          className="cursor-pointer"
+          type="color"
+          onInput={(event) =>
+            editor.chain().focus().setColor(event.target.value).run()
+          }
+          value={editor.getAttributes("textStyle").color}
+          data-testid="setColor"
+        />
         <button
           className="menu-button"
           onClick={() => editor.chain().focus().undo().run()}
@@ -143,12 +165,7 @@ function SimpleEditor({ placeholder, onChange, value }) {
         </button>
       </div>
 
-      <EditorContent
-        editor={editor}
-        onUpdate={(e) => {
-          console.log(e);
-        }}
-      />
+      <EditorContent editor={editor} />
     </div>
   );
 }
