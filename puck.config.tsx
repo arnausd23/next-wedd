@@ -11,7 +11,7 @@ import Timeline from "./app/sections/Timeline";
 import Timer from "./app/sections/Timer";
 import HomeText from "./app/components/Puck/HomeText";
 
-const Editor = dynamic(() => import("./app/components/Puck/Editor"), {
+const Editor = dynamic(() => import("./app/components/Puck/Editor/Editor"), {
   ssr: false,
 });
 
@@ -52,6 +52,11 @@ export type Props = {
     backgroundColor: string;
     backgroundImage: any;
     columns: Number;
+  };
+  Form: {
+    options: any[];
+    buttonText: string;
+    buttonColor: string;
   };
   Column: {
     width: string;

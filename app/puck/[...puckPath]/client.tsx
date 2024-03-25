@@ -9,7 +9,7 @@ import { Puck } from "@measured/puck";
 import config from "../../../puck.config";
 import Icon from "../../components/Puck/Icons/Icon";
 import { ComponentRename } from "../../components/Puck/services/ComponentRename";
-import React from 'react'
+import React from "react";
 
 export function Client({ path, data }: { path: string; data: Data }) {
   return (
@@ -58,7 +58,7 @@ export function Client({ path, data }: { path: string; data: Data }) {
                 ),
               }),
             });
-            
+
             return (
               <div
                 className="m-3 flex gap-5 cursor-grab p-3 bg-white"
