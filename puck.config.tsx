@@ -432,7 +432,7 @@ export const config: Config<Props> = {
           options: [
             { label: "Start", value: "start" },
             { label: "Center", value: "center" },
-            { label: "End", value: "end" },
+            { label: "End", value: "flex-end" },
           ],
         },
         verticalContentAlignment: {
@@ -440,7 +440,7 @@ export const config: Config<Props> = {
           options: [
             { label: "Start", value: "start" },
             { label: "Center", value: "center" },
-            { label: "End", value: "end" },
+            { label: "End", value: "flex-end" },
           ],
         },
       },

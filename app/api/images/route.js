@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import path from "path";
 import { writeFile } from "fs/promises";
+import sharp from "sharp";
 
 export const POST = async (req, res) => {
   const formData = await req.formData();
@@ -11,13 +12,13 @@ export const POST = async (req, res) => {
   }
 
   const buffer = Buffer.from(await file.arrayBuffer());
-  // const filename = Date.now() + file.name.replaceAll(" ", "_");
-  const filename = file.name.replaceAll(" ", "_");
+  const filename = path.parse(file.name).name + ".webp";
 
   try {
+    const webpBuffer = await sharp(buffer).webp({ quality: 80 }).toBuffer();
     await writeFile(
       path.join(process.cwd(), "public/uploads/" + filename),
-      buffer
+      webpBuffer
     );
     return NextResponse.json({ Message: "Success", status: 201, filename });
   } catch (error) {
