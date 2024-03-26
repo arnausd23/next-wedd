@@ -96,18 +96,18 @@ div[class^="_DraggableComponent-actions"] {
   align-items: center;
 }
 
-.column-widget[style*="align-items: end"]
+.column-widget[style*="align-items: flex-end"]
   [class^="_DraggableComponent-contents"]
   > [class^="_DropZone-renderWrapper"] {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
 }
 
-.column-widget[style*="align-items: start"]
+.column-widget[style*="align-items: flex-start"]
   [class^="_DraggableComponent-contents"]
   > [class^="_DropZone-renderWrapper"] {
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
 }
 
 [data-rfd-drag-handle-draggable-id^="draggable-ParagraphWithBackground"] {

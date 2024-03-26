@@ -430,7 +430,7 @@ export const config: Config<Props> = {
         horizontalContentAlignment: {
           type: "radio",
           options: [
-            { label: "Start", value: "start" },
+            { label: "Start", value: "flex-start" },
             { label: "Center", value: "center" },
             { label: "End", value: "flex-end" },
           ],
@@ -438,7 +438,7 @@ export const config: Config<Props> = {
         verticalContentAlignment: {
           type: "radio",
           options: [
-            { label: "Start", value: "start" },
+            { label: "Start", value: "flex-start" },
             { label: "Center", value: "center" },
             { label: "End", value: "flex-end" },
           ],
@@ -447,8 +447,8 @@ export const config: Config<Props> = {
       defaultProps: {
         width: "100%",
         height: "auto",
-        horizontalContentAlignment: "start",
-        verticalContentAlignment: "start",
+        horizontalContentAlignment: "flex-start",
+        verticalContentAlignment: "flex-start",
       },
       render: ({
         width,
