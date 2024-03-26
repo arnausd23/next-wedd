@@ -34,6 +34,26 @@ export const Underline = ({ size = 16, color = "currentColor" }) => (
   </svg>
 );
 
+export const BulletList = ({ size = 16, color = "currentColor" }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke={color}
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <g>
+      <g fill={color} fillRule="evenodd">
+        <path d="M27 17H9a1 1 0 1 0 0 2h18a1 1 0 1 0 0-2ZM2 0a2 2 0 1 0 .001 4.001A2 2 0 0 0 2 0Zm7 3h18a1 1 0 1 0 0-2H9a1 1 0 1 0 0 2Zm18 6H9a1 1 0 1 0 0 2h18a1 1 0 1 0 0-2ZM2 8a2 2 0 1 0 .001 4.001A2 2 0 0 0 2 8Zm0 8a2 2 0 1 0 .001 4.001A2 2 0 0 0 2 16Z" />
+      </g>
+    </g>
+  </svg>
+);
+
 export const Italic = ({ size = 16, color = "currentColor" }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"

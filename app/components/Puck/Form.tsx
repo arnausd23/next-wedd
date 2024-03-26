@@ -30,7 +30,7 @@ function Form({ options, buttonText, buttonColor }) {
   };
 
   return (
-    <section id="contact" className="w-full relative py-10 px-5 lg:py-20">
+    <section className="w-full relative py-10 lg:py-20">
       <form
         name={formName}
         className="relative z-10 bg-white py-14 lg:py-20 px-6 lg:px-10 lg:w-1/2 lg:my-0 lg:mx-auto rounded-lg shadow-2xl"

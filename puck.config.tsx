@@ -71,6 +71,11 @@ export type Props = {
   };
   VerticalSpacing: {
     height: string;
+    hiddeInMobile: string;
+  };
+  HorizontalSpacing: {
+    height: string;
+    hiddeInMobile: string;
   };
 };
 
@@ -81,12 +86,20 @@ export const config: Config<Props> = {
         height: {
           type: "text",
         },
+        hiddeInMobile: {
+          type: "radio",
+          options: [
+            { label: "Yes", value: "initial" },
+            { label: "No", value: "hidden" },
+          ],
+        },
       },
       defaultProps: {
         height: "10px",
+        hiddeInMobile: "initial",
       },
-      render: ({ height }) => {
-        return <div style={{ height }} />;
+      render: ({ height, hiddeInMobile }) => {
+        return <div style={{ height, display: hiddeInMobile }} />;
       },
     },
     Paragraph: {
@@ -376,6 +389,7 @@ export const config: Config<Props> = {
         height: "auto",
         columns: 2,
         backgroundImageMode: "contain",
+        backgroundImage: null,
       },
       render: ({
         width,
@@ -394,7 +408,9 @@ export const config: Config<Props> = {
               width,
               height,
               backgroundColor,
-              backgroundImage: `url(/uploads/${backgroundImage})`,
+              backgroundImage: backgroundImage
+                ? `url(/uploads/${backgroundImage})`
+                : "",
               backgroundSize: backgroundImageMode,
               gridTemplateColumns: `repeat(${columns}, 1fr)`,
             }}
@@ -444,7 +460,7 @@ export const config: Config<Props> = {
         return (
           <div
             className={
-              "column-widget flex flex-col overflow-hidden sm:py-12 sm:px-24" +
+              "column-widget flex flex-col overflow-hidden p-12 sm:py-12 sm:px-24" +
               ` items-${horizontalContentAlignment}`
             }
             style={{

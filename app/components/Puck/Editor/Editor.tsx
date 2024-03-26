@@ -1,6 +1,6 @@
 // @ts-nocheck
 import classNames from "classnames";
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import "./styles.css";
 // => Tiptap packages
 import Bold from "@tiptap/extension-bold";
@@ -20,10 +20,79 @@ import Heading from "@tiptap/extension-heading";
 import TextStyle from "@tiptap/extension-text-style";
 import * as Icons from "../Icons/Editor/EditorIcons";
 import { FontSize } from "./FontSize";
+import Dropdown from "./Dropdown";
+import ListItem from "@tiptap/extension-list-item";
+import BulletList from "@tiptap/extension-bullet-list";
+
+export const sizes = [
+  {
+    label: <span>8px</span>,
+    key: "8",
+  },
+  {
+    label: <span>9px</span>,
+    key: "9",
+  },
+  {
+    label: <span>10px</span>,
+    key: "10",
+  },
+  {
+    label: <span>12px</span>,
+    key: "12",
+  },
+  {
+    label: <span>14px</span>,
+    key: "14",
+  },
+  {
+    label: <span>16px</span>,
+    key: "16",
+  },
+  {
+    label: <span>18px</span>,
+    key: "18",
+  },
+  {
+    label: <span>20px</span>,
+    key: "20",
+  },
+  {
+    label: <span>24px</span>,
+    key: "24",
+  },
+  {
+    label: <span>30px</span>,
+    key: "30",
+  },
+  {
+    label: <span>36px</span>,
+    key: "36",
+  },
+  {
+    label: <span>48px</span>,
+    key: "48",
+  },
+  {
+    label: <span>60px</span>,
+    key: "60",
+  },
+  {
+    label: <span>72px</span>,
+    key: "72",
+  },
+  {
+    label: <span>96px</span>,
+    key: "96",
+  },
+];
 
 function SimpleEditor({ placeholder, onChange, value }) {
+  const [fontSize, setFontSize] = useState("16");
+
   const editor = useEditor({
     onUpdate: ({ editor }) => {
+      console.log(editor.getHTML());
       onChange(editor.getHTML());
     },
     extensions: [
@@ -38,6 +107,8 @@ function SimpleEditor({ placeholder, onChange, value }) {
       Underline,
       Italic,
       Strike,
+      BulletList,
+      ListItem,
       TextAlign.configure({
         types: ["heading", "paragraph"],
       }),
@@ -64,6 +135,10 @@ function SimpleEditor({ placeholder, onChange, value }) {
     editor.chain().focus().toggleStrike().run();
   }, [editor]);
 
+  const toggleBulletList = useCallback(() => {
+    editor.chain().focus().toggleBulletList().run();
+  }, [editor]);
+
   const toggleAlign = useCallback(
     (align) => {
       editor.chain().focus().setTextAlign(align).run();
@@ -80,21 +155,6 @@ function SimpleEditor({ placeholder, onChange, value }) {
       <div className="menu">
         <button
           className="menu-button"
-          onClick={() => editor.chain().focus().setFontSize(`120px`).run()}
-        >
-          Grande
-        </button>
-        <input
-          className="cursor-pointer"
-          type="color"
-          onInput={(event) =>
-            editor.chain().focus().setColor(event.target.value).run()
-          }
-          value={editor.getAttributes("textStyle").color}
-          data-testid="setColor"
-        />
-        <button
-          className="menu-button"
           onClick={() => editor.chain().focus().undo().run()}
           disabled={!editor.can().undo()}
         >
@@ -107,6 +167,23 @@ function SimpleEditor({ placeholder, onChange, value }) {
         >
           <Icons.RotateRight />
         </button>
+        <Dropdown
+          items={sizes}
+          onClick={(e) => {
+            editor.chain().focus().setFontSize(`${e.key}px`).run();
+            setFontSize(e.key);
+          }}
+          buttonText={`${fontSize}px`}
+        />
+        <input
+          className="cursor-pointer"
+          type="color"
+          onInput={(event) =>
+            editor.chain().focus().setColor(event.target.value).run()
+          }
+          value={editor.getAttributes("textStyle").color}
+          data-testid="setColor"
+        />
         <button
           className={classNames("menu-button", {
             "is-active": editor.isActive("bold"),
@@ -138,6 +215,14 @@ function SimpleEditor({ placeholder, onChange, value }) {
           onClick={toggleStrike}
         >
           <Icons.Strikethrough />
+        </button>
+        <button
+          className={classNames("menu-button", {
+            "is-active": editor.isActive("bulletList"),
+          })}
+          onClick={toggleBulletList}
+        >
+          <Icons.BulletList />
         </button>
         <button
           onClick={() => toggleAlign("left")}

@@ -26,9 +26,6 @@
   margin-bottom: 48px;
 }
 
-.editor a {
-  color: var(--color-pink);
-}
 .editor p {
   margin: 0;
 }
@@ -53,11 +50,12 @@
   top: 2px;
   left: 2px;
   z-index: 1;
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
   align-items: center;
   gap: 8px;
   width: calc(100% - 4px);
-  height: 40px;
+  height: auto;
   margin: 0;
   padding: 0 8px;
   border-top-left-radius: 4px;
@@ -143,7 +141,7 @@
 }
 .editor .ProseMirror {
   margin-top: 4px;
-  padding: 48px 8px 8px;
+  padding: 70px 8px 8px;
   border: 2px solid var(--color-gray-4);
   border-radius: 4px;
 }

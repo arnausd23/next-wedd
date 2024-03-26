@@ -28,6 +28,8 @@ export const ComponentRename = (name: keyof Props): string => {
       return "Overlay";
     case "VerticalSpacing":
       return "Espaciado Vertical";
+    case "HorizontalSpacing":
+      return "Espaciado Horizontal";
     default:
       return name;
   }
