@@ -24,7 +24,6 @@ export type Props = {
   };
   Image: {
     file: any;
-    url: string;
     mode: "inline" | "background";
   };
   Menu: {
@@ -84,9 +83,11 @@ export const config: Config<Props> = {
     VerticalSpacing: {
       fields: {
         height: {
+          label: "Altura",
           type: "text",
         },
         hiddeInMobile: {
+          label: "Visible en móvil",
           type: "radio",
           options: [
             { label: "Yes", value: "initial" },
@@ -105,6 +106,7 @@ export const config: Config<Props> = {
     Paragraph: {
       fields: {
         text: {
+          label: "Texto",
           type: "custom",
           render: ({ name, onChange, value }) => {
             return (
@@ -123,6 +125,7 @@ export const config: Config<Props> = {
     ParagraphWithBackground: {
       fields: {
         text: {
+          label: "Texto",
           type: "custom",
           render: ({ name, onChange, value }) => {
             return (
@@ -141,20 +144,27 @@ export const config: Config<Props> = {
     Form: {
       fields: {
         options: {
+          label: "Tipo de campo",
           type: "array",
           arrayFields: {
             label: { type: "text" },
             inputType: {
               type: "radio",
               options: [
-                { label: "Text", type: "text" },
-                { label: "Select", value: "select" },
+                { label: "Texto", type: "text" },
+                { label: "Selector", value: "select" },
               ],
             },
           },
         },
-        buttonText: { type: "text" },
-        buttonColor: { type: "text" },
+        buttonText: {
+          label: "Texto del botón",
+          type: "text",
+        },
+        buttonColor: {
+          label: "Color del botón",
+          type: "text",
+        },
       },
       defaultProps: {
         options: [],
@@ -177,25 +187,24 @@ export const config: Config<Props> = {
             <FileUploader name={name} onChange={onChange} />
           ),
         },
-        url: { type: "text" },
-        width: { type: "text" },
-        height: { type: "text" },
+        width: { label: "Tamaño", type: "text" },
+        height: { label: "Altura", type: "text" },
         mode: {
+          label: "Tipo de imagen",
           type: "radio",
           options: [
-            { label: "Regular", value: "regular" },
-            { label: "Rounded", value: "rounded" },
+            { label: "Normal", value: "regular" },
+            { label: "Redonda", value: "rounded" },
           ],
         },
       },
       defaultProps: {
         file: null,
-        url: "",
         mode: "inline",
         width: "auto",
         height: "auto",
       },
-      render: ({ url, mode, file, width, height }) => {
+      render: ({ mode, file, width, height }) => {
         return (
           <>
             {file && mode !== "rounded" && (
@@ -227,14 +236,13 @@ export const config: Config<Props> = {
         file: {
           type: "custom",
           render: ({ name, onChange, value }) => (
-            <>
-              <FileUploader name={name} onChange={onChange} />
-            </>
+            <FileUploader name={name} onChange={onChange} />
           ),
         },
-        link: { type: "text" },
-        text: { type: "text" },
+        link: { label: "Link", type: "text" },
+        text: { label: "Texto", type: "text" },
         hasImage: {
+          label: "¿Tiene imagen?",
           type: "radio",
           options: [
             { label: "Yes", value: "Yes" },
@@ -280,10 +288,11 @@ export const config: Config<Props> = {
           ),
         },
         items: {
+          label: "Secciones del menú",
           type: "array",
           arrayFields: {
-            title: { type: "text" },
-            link: { type: "text" },
+            title: { label: "Título", type: "text" },
+            link: { label: "Link", type: "text" },
           },
         },
       },
@@ -298,6 +307,7 @@ export const config: Config<Props> = {
     Grid: {
       fields: {
         items: {
+          label: "Elementos del grid",
           type: "array",
           arrayFields: {
             image: {
@@ -306,9 +316,9 @@ export const config: Config<Props> = {
                 <FileUploader name={name} onChange={onChange} />
               ),
             },
-            title: { type: "text" },
-            description: { type: "text" },
-            schedule: { type: "text" },
+            title: { label: "Título", type: "text" },
+            description: { label: "Descripción", type: "text" },
+            schedule: { label: "Duración del evento", type: "text" },
           },
         },
       },
@@ -322,11 +332,12 @@ export const config: Config<Props> = {
     Calendar: {
       fields: {
         date: {
+          label: "Fecha del evento",
           type: "custom",
           render: ({ name, onChange, value }) => {
             return (
               <>
-                <label>Start date:</label>
+                <label>Fecha del evento:</label>
                 <br />
                 <input
                   type="date"
@@ -348,11 +359,12 @@ export const config: Config<Props> = {
     Information: {
       fields: {
         information: {
+          label: "Elementos de información",
           type: "array",
           arrayFields: {
-            title: { type: "text" },
-            link: { type: "text" },
-            text: { type: "text" },
+            title: { label: "Título", type: "text" },
+            link: { label: "Link", type: "text" },
+            text: { label: "Texto", type: "text" },
           },
         },
       },
@@ -365,24 +377,29 @@ export const config: Config<Props> = {
     },
     Container: {
       fields: {
-        id: { type: "text" },
-        width: { type: "text" },
-        height: { type: "text" },
-        backgroundColor: { type: "text" },
+        id: {
+          label: `Id (útil como link para el Menú)`,
+          type: "text",
+        },
+        width: { label: "Tamaño", type: "text" },
+        height: { label: "Altura", type: "text" },
+        backgroundColor: { label: "Color de fondo", type: "text" },
         backgroundImage: {
+          label: "Imagen de fondo",
           type: "custom",
           render: ({ name, onChange, value }) => (
             <FileUploader name={name} onChange={onChange} />
           ),
         },
         backgroundImageMode: {
+          label: "Modo de la imagen de fondo",
           type: "radio",
           options: [
-            { label: "Cover", value: "cover" },
-            { label: "Contain", value: "contain" },
+            { label: "Tamaño completo", value: "cover" },
+            { label: "Tamño original", value: "contain" },
           ],
         },
-        columns: { type: "number" },
+        columns: { label: "Columnas", type: "number" },
       },
       defaultProps: {
         width: "100%",
@@ -424,10 +441,11 @@ export const config: Config<Props> = {
     },
     Column: {
       fields: {
-        width: { type: "text" },
-        height: { type: "text" },
-        backgroundColor: { type: "text" },
+        width: { label: "Tamaño", type: "text" },
+        height: { label: "Altura", type: "text" },
+        backgroundColor: { label: "Color de fondo", type: "text" },
         horizontalContentAlignment: {
+          label: "Alineación horizontal",
           type: "radio",
           options: [
             { label: "Start", value: "flex-start" },
@@ -436,6 +454,7 @@ export const config: Config<Props> = {
           ],
         },
         verticalContentAlignment: {
+          label: "Alineación vertical",
           type: "radio",
           options: [
             { label: "Start", value: "flex-start" },
@@ -479,6 +498,7 @@ export const config: Config<Props> = {
     Overlay: {
       fields: {
         images: {
+          label: "Imágenes de fondo",
           type: "array",
           arrayFields: {
             image: {
@@ -489,7 +509,7 @@ export const config: Config<Props> = {
             },
           },
         },
-        backgroundColor: { type: "text" },
+        backgroundColor: { label: "Color de fondo", type: "text" },
       },
       defaultProps: {
         images: [],

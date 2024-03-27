@@ -6,7 +6,7 @@ function FileUploader({ name, onChange }) {
 
   return (
     <div>
-      <p>Choose a file to add</p>
+      <p className="mb-2">Elija un archivo para agregar</p>
       <input
         type="file"
         accept="image/*"
